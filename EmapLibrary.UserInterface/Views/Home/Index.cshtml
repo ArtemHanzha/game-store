@@ -1,0 +1,131 @@
+﻿@using EpamLibrary.Contracts.Models
+@{
+    ViewBag.Title = "Home Page";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EPAM Library</title>
+
+
+    @Styles.Render("~/Content/css")
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+    <!-- *********  Header  ********** -->
+
+    <div id="header">
+        <div id="header_in">
+
+            <h1><a href="index.html"><b>FINAL</b> TASK</a></h1>
+
+            <div id="menu">
+                <ul>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Catalog", "Catalog", "Home")</li>
+                    <li><a href="ourwork.html">Top 100</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Sign in</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- *********  Main part (slider)  ********** -->
+
+
+    <div id="main_part">
+        <div id="main_part_in">
+
+            <h2>Kharkiv national library</h2>
+
+            <p>Building a bridge between library and information</p>
+
+        </div>
+    </div>
+
+
+    <!-- *********  Content  ********** -->
+
+    <div id="content">
+
+        <div class="thirds">
+            <h3>Hey, is it free? Do I need to pay for it?</h3>
+            <p>Library comletely free of charge. You can reed any book from catalog for $0.00!</p>
+        </div>
+
+        <div class="thirds">
+            <h3>Are there any electronic versions of books?</h3>
+            <p>Yes we have. Almost 90% of books are available in electronic version.</p>
+        </div>
+
+        <div class="thirds">
+            <h3>What if I want to read paper version at home?</h3>
+            <p>Then you need to register at our web-site and take a book from office. (See more in 'About' section)!</p>
+        </div>
+
+        <hr class="cleanit">
+
+        <div class="banner1">
+            <p>Take a look on <b>last reviewed books</b>.<p>
+                <a href="catalog.html" class="button_dark">SEE ALL</a>
+        </div>
+
+        <!-- ****  Recent works  ***** -->
+
+        <h3>Last reviewed</h3>
+
+        @Helpers.DisplayBooks(new List<Book>()
+{
+new Book(){Title = "Alice"},
+new Book(){Title = "Amily"},
+new Book(){Title = "Morgan"},
+new Book(){Title = "Valera"},
+})
+
+        <hr class="cleanit">
+
+        <div class="banner1">
+            <p>Take a look on <b>newest books</b> in library.<p>
+                <a href="catalog.html" class="button_dark">CATALOG</a>
+        </div>
+
+        <h3>Newest books</h3>
+
+        @Helpers.DisplayBooks(new List<Book>()
+{
+new Book(){Title = "Alice"},
+new Book(){Title = "Amily"},
+new Book(){Title = "Morgan"},
+new Book(){Title = "Valera"},
+})
+
+        <div class="cara"></div>
+
+    </div>
+
+
+    <!-- *********  Footer  ********** -->
+
+    <hr class="cleanit">
+
+    <div id="footer">
+        <div id="footer_in">
+
+            <p>2018 All rights reserved.(c)</p>
+
+        </div>
+    </div>
+
+
+</body>
+</html>

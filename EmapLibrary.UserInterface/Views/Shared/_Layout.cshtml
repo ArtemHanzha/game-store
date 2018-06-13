@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EPAM Library</title>
+
+     @Styles.Render("~/Content/css")
+
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+    <!-- *********  Header  ********** -->
+
+    <div id="header">
+        <div id="header_in">
+
+            <h1><a href="index.html"><b>FINAL</b> TASK</a></h1>
+
+            <div id="menu">
+                <ul>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Catalog", "Catalog", "Home")</li>
+                    <li>@Html.ActionLink("Top 100", "Top", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Sing in", "Login", "Home")</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- *********  Main part – headline ********** -->
+
+
+    <!--div id="main_part_inner">
+        <div id="main_part_inner_in">
+
+            <h2>Catalog</h2>
+
+        </div>
+
+    </div-->
+
+
+    <!-- *********  Content  ********** -->
+
+        @RenderBody()
+
+
+
+
+    <!-- *********  Footer  ********** -->
+
+    <hr class="cleanit">
+
+    <div id="footer">
+        <div id="footer_in">
+
+            <p>2018 All rights reserved.(c)</p>
+
+        </div>
+    </div>
+</body>
+</html>

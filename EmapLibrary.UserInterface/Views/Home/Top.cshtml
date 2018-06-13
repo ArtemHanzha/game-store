@@ -1,0 +1,34 @@
+﻿@model EmapLibrary.UserInterface.ViewModels.CatalogViewModel
+@{
+    ViewBag.Title = "Top";
+}
+
+<div id="content_inner">
+
+    <ul id="work_filter">
+        <li><a href="#">EVERYTHING</a></li>
+        <li><a href="#">CI</a></li>
+        <li><a href="#" class="active">WEBDESIGN</a></li>
+        <li><a href="#">PHOTOGRAPHY</a></li>
+        <li><a href="#">OTHER</a></li>
+    </ul>
+
+    <!-- **** Items **** -->
+
+    @Helpers.DisplayBooks(Model.Books)
+
+    <hr class="cleanit">
+
+    <!-- ** Pagination ** -->
+
+    <ul class="pagination">
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#" class="active">3</a></li>
+        <li><a href="#">4</a></li>
+    </ul>
+
+    <div class="cara"></div>
+
+</div>
+

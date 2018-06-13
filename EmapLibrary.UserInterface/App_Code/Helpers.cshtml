@@ -1,0 +1,19 @@
+﻿@using EpamLibrary.Contracts.Models
+@helper DisplayBook(Book book)
+{
+    <div class="fourths_portfolio">
+        <h4>
+            @book.Title<br>
+            <span>see detail</span>
+        </h4>
+        <a href="#"><img src="@Href("~/Content/img/portfolio1.jpg")" alt="@book.Title's front page"></a>
+    </div>
+}
+
+@helper DisplayBooks(IEnumerable<Book> books)
+{
+    foreach (var book in books)
+    {
+        @DisplayBook(book)
+    }
+}
