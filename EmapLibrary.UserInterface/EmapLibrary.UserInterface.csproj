@@ -46,6 +46,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=7.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.7.0.0\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -65,6 +74,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -162,13 +172,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\Automapping\ViewModelsMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\BookViewModel.cs" />
+    <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\Enums\ActiveSortFilter.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
+    <Compile Include="ViewModels\ConsumerViewModel.cs" />
+    <Compile Include="ViewModels\Internal\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\LibraryLogRecordViewModel.cs" />
+    <Compile Include="ViewModels\WorkerViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\img\banner1.jpg" />
     <Content Include="Content\img\bg_footer.jpg" />
+    <Content Include="Content\img\liabrary-booknotfound.png" />
     <Content Include="Content\img\main_img_1.jpg" />
     <Content Include="Content\img\menu_cut.jpg" />
     <Content Include="Content\img\portfolio1.jpg" />
@@ -231,7 +249,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -247,6 +264,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EpamLibrary.BLL\EpamLibrary.BLL.csproj">
+      <Project>{45F7C8A4-931C-4700-A3FE-2CEFE7730816}</Project>
+      <Name>EpamLibrary.BLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EpamLibrary.Contracts\EpamLibrary.Contracts.csproj">
       <Project>{6008DF3D-0B8F-47A5-BF68-8AEEA80B46F8}</Project>
       <Name>EpamLibrary.Contracts</Name>

@@ -8,7 +8,7 @@ namespace EpamLibrary.Contracts.Models
     {
         public string WorkerNumber { get; set; }
 
-        public DateTime HiringDate { get; set; }
+        public DateTime? HiringDate { get; set; }
 
         public WorkerType WorkerType { get; set; }
     }

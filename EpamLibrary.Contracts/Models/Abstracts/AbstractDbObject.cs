@@ -5,7 +5,7 @@ namespace EpamLibrary.Contracts.Models.Abstracts
     public abstract class AbstractDbObject
     {
         [Key]
-        public virtual int Id { get; set; }
+        public int Id { get; set; }
 
         public bool IsDeleted { get; set; }
     }

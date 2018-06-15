@@ -8,9 +8,9 @@ namespace EpamLibrary.Contracts.Models
 {
     public class Book : AbstractDbObject
     {
-        private DateTime _dateOfPublication;
+        private DateTime? _dateOfPublication;
         
-        public int LibraryNumber { get; set; }
+        public int? LibraryNumber { get; set; }
 
         public string Title { get; set; }
 
@@ -22,15 +22,18 @@ namespace EpamLibrary.Contracts.Models
 
         public ICollection<Author> Authors { get; set; }
 
-        public DateTime DateOfPublication
+        public DateTime? DateOfPublication
         {
-            get => _dateOfPublication.Date;
-            set => _dateOfPublication = value.Date;
+            get => _dateOfPublication?.Date;
+            set
+            {
+                if (value != null) _dateOfPublication = value.Value.Date;
+            }
         }
 
         public string PublicationHouse { get; set; }
 
-        public float Price { get; set; }
+        public float? Price { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
 

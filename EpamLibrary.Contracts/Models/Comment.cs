@@ -15,7 +15,7 @@ namespace EpamLibrary.Contracts.Models
 
         public Book Book { get; set; }
 
-        public DateTime PublicationDateTime { get; set; }
+        public DateTime? PublicationDateTime { get; set; }
 
         public string Review { get; set; }
 

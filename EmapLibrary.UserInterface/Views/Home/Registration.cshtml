@@ -1,7 +1,46 @@
-﻿
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.RegistrationViewModel
 @{
     ViewBag.Title = "Registration";
 }
 
+<div id="main_part_inner">
+    <div id="main_part_inner_in">
+        
+        <h2>Registration</h2>
+            
+    </div>
+            
+</div>
+        
+        
+<!-- *********  Content  ********** -->
+        
+<div id="content_inner">
+            
+    <!-- ***** Out team + portraits ***** -->
+            
+    <h3>Registration form</h3>
+           
+    <form action="Registration" method="post" class="formit">
+        <label for="login">Login</label>
+        <input type="text" placeholder="nagibator227" name="login" class="@(Model.IsLoginError ? "error" : null)" value="@(Model.Login)">
+        <label for="password1">Password</label>
+        <input type="password" placeholder="12345678" name="password1" class="@(Model.IsPassError ? "error" : null)">
+        <label for="password2">Password again</label>
+        <input type="password" placeholder="12345678" name="password2" class="@(Model.IsPassError ? "error" : null)">
+        <label for="email">E-Mail</label>
+        <input type="text" placeholder="best.doter@mail.ru" name="email" class="@(Model.IsEmailError ? "error" : null)" value="@(Model.Email)">
+        <label for="name">Name</label>
+        <input type="text" placeholder="Ivan" name="name" class="@(Model.IsNameError ? "error" : null)" value="@(Model.Name)">
+        <label for="surmane">Surname</label>
+        <input type="text" placeholder="Ivanov" name="surname" class="@(Model.IsSurnameError ? "error" : null)" value="@(Model.Surname)">
+        <label for="lastname">Last name</label>
+        <input type="text" placeholder="Ivanovich" name="lastname" class="@(Model.IsLastNameError ? "error" : null)" value="@(Model.LastName)">
+        <label for="birthday">Birthday</label>
+        <input type="text" placeholder="12.12.2012" name="birthday" class="@(Model.IsBirthdayError ? "error" : null)" value="@(Model.Birthday)">
+        <input type="submit" value="REGISTER" class="button_submit">
+    </form>
 
+           
+</div>
 

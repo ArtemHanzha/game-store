@@ -15,9 +15,13 @@ namespace EpamLibrary.Contracts.Models.Abstracts
 
         public string LastName { get; set; }
 
-        public DateTime Birthday { get; set; }
+        public DateTime? Birthday { get; set; }
 
         public ICollection<Comment> Comments { get; set; }
+
+        public ICollection<BookInstance> BooksHistory { get; set; }
+
+        public string EMail { get; set; }
 
         public bool Equals(AbstractUser user)
         {

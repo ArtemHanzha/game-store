@@ -16,10 +16,9 @@ namespace EpamLibrary.DAL.Context
         public DbSet<LibraryLogRecord> LibraryLogRecords { get; set; }
 
         public LibraryContext()
-        :base("Server=tcp:ganzhalibrary.database.windows.net,1433;Initial Catalog=Library;Persist Security Info=False;User ID=ganzha;Password=7294682aA;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")
+         //:this(@"Data Source=.\SQLEXPRESS;Initial Catalog=Library;Integrated Security=True;MultipleActiveResultSets=true;")
         {
-            Database.SetInitializer<LibraryContext>(new LibraryDbInitializer());
-            Database.Initialize(true);
+
         }
 
         public LibraryContext(string connectionString)

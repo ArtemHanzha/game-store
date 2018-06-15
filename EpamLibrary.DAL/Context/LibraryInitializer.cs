@@ -14,18 +14,37 @@ namespace EpamLibrary.DAL.Context
     {
         protected override void Seed(LibraryContext db)
         {
+            #region Authors
+
+            db.Authors.Add(new Author() {  Name = "Ivan", Surname = "Medvedev", LastName = "Orehovich", IsDeleted = false });
+            db.Authors.Add(new Author() { Name = "Artem", Surname = "Kostikov", LastName = "Abramovech", IsDeleted = false });
+            db.Authors.Add(new Author() { Name = "Evgeniy", Surname = "Perepelitsyn", LastName = "Kinonovich", IsDeleted = false });
+            db.Authors.Add(new Author() { Name = "Valeriy", Surname = "Trubachev", LastName = "Orehovich", IsDeleted = false });
+            
+            db.SaveChanges();
+            #endregion
+
             #region Books
 
-            db.Books.Add(new Book { Title = "BookInstance 1", Authors = new List<Author>() { db.Authors.ToList()[0], db.Authors.ToList()[0] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 2", Authors = new List<Author>() { db.Authors.ToList()[1], db.Authors.ToList()[0] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 3", Authors = new List<Author>() { db.Authors.ToList()[3], db.Authors.ToList()[0], db.Authors.ToList()[1] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 4", Authors = new List<Author>() { db.Authors.ToList()[1] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 5", Authors = new List<Author>() { db.Authors.ToList()[2] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 6", Authors = new List<Author>() { db.Authors.ToList()[3], db.Authors.ToList()[0], db.Authors.ToList()[1], db.Authors.ToList()[2] }, DateOfPublication = new DateTime(1989, 10, 10) });
-            db.Books.Add(new Book { Title = "BookInstance 7", Authors = new List<Author>() { db.Authors.ToList()[0] }, DateOfPublication = new DateTime(1989, 10, 10) });
-
-            #endregion
+            db.Books.Add(new Book { Title = "BookInstance 1", Authors = new List<Author>() { db.Authors.ToList()[0], db.Authors.ToList()[0] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 2", Authors = new List<Author>() { db.Authors.ToList()[1], db.Authors.ToList()[0] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 3", Authors = new List<Author>() { db.Authors.ToList()[3], db.Authors.ToList()[0], db.Authors.ToList()[1] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 4", Authors = new List<Author>() { db.Authors.ToList()[1] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 5", Authors = new List<Author>() { db.Authors.ToList()[2] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 6", Authors = new List<Author>() { db.Authors.ToList()[3], db.Authors.ToList()[0], db.Authors.ToList()[1], db.Authors.ToList()[2] }, DateOfPublication = DateTime.Today.AddYears(-30) });
+            db.Books.Add(new Book { Title = "BookInstance 7", Authors = new List<Author>() { db.Authors.ToList()[0] }, DateOfPublication = DateTime.Today.AddYears(-30) });
             
+            db.SaveChanges();
+            #endregion
+
+            db.Authors.ToList()[0].Books = new List<Book>() {db.Books.ToList()[0], db.Books.ToList()[3], db.Books.ToList()[1]};
+            db.Authors.ToList()[1].Books =
+                new List<Book>() {db.Books.ToList()[6], db.Books.ToList()[2], db.Books.ToList()[1]};
+            db.Authors.ToList()[2].Books =
+                new List<Book>() {db.Books.ToList()[4], db.Books.ToList()[3], db.Books.ToList()[0]};
+            db.Authors.ToList()[3].Books =
+                new List<Book>() {db.Books.ToList()[5], db.Books.ToList()[0], db.Books.ToList()[2]};
+
             #region Consumers
 
             db.Consumers.Add(new Consumer() { Name = "Test0", Surname = "User01", Login = "user01", Password = "0000" });
@@ -38,14 +57,16 @@ namespace EpamLibrary.DAL.Context
             db.Consumers.Add(new Consumer() { Name = "Test7", Surname = "User08", Login = "user08", Password = "0000" });
             db.Consumers.Add(new Consumer() { Name = "Test8", Surname = "User09", Login = "user09", Password = "0000" });
 
+            db.SaveChanges();
             #endregion
-            
+
             #region Workers
 
             db.Workers.Add(new Worker() { Name = "TestW0", Surname = "User10", Login = "user10", Password = "0000" });
 
             #endregion
 
+            db.SaveChanges();
             #region Comments
 
             db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Consumers.ToList()[0], Book = db.Books.ToList()[1], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
@@ -55,15 +76,7 @@ namespace EpamLibrary.DAL.Context
 
             #endregion
 
-            #region Authors
-
-            db.Authors.Add(new Author(){Books = new List<Book>(){ db.Books.ToList()[0], db.Books.ToList()[3], db.Books.ToList()[1] }, Name = "Ivan", Surname = "Medvedev", LastName = "Orehovich", IsDeleted = false});
-            db.Authors.Add(new Author() { Books = new List<Book>() { db.Books.ToList()[6], db.Books.ToList()[2], db.Books.ToList()[1] }, Name = "Artem", Surname = "Kostikov", LastName = "Abramovech", IsDeleted = false });
-            db.Authors.Add(new Author() { Books = new List<Book>() { db.Books.ToList()[4], db.Books.ToList()[3], db.Books.ToList()[0] }, Name = "Evgeniy", Surname = "Perepelitsyn", LastName = "Kinonovich", IsDeleted = false });
-            db.Authors.Add(new Author() { Books = new List<Book>() { db.Books.ToList()[5], db.Books.ToList()[0], db.Books.ToList()[2] }, Name = "Valeriy", Surname = "Trubachev", LastName = "Orehovich", IsDeleted = false });
-
-            #endregion
-
+            db.SaveChanges();
             #region BookInstances
 
             db.BookInstances.Add(new BookInstance()
@@ -140,6 +153,7 @@ namespace EpamLibrary.DAL.Context
 
             #endregion
 
+            db.SaveChanges();
             #region Journal
 
             db.LibraryLogRecords.Add(new LibraryLogRecord()

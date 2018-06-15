@@ -43,11 +43,11 @@ namespace EmapLibrary.UserInterface.App_Start
         {
             var modules = new INinjectModule[]
             {
-                new NinjectDalModule("MyDB"),//connection
+                new NinjectDalModule("Library"),//connection
                 new NinjectBllModule(),
             };
 
-            var kernel = new StandardKernel();
+            var kernel = new StandardKernel(modules);
             try
             {
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);

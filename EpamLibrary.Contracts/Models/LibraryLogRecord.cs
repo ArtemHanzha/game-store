@@ -15,11 +15,11 @@ namespace EpamLibrary.Contracts.Models
 
         public Worker Librariant { get; set; }
 
-        public DateTime RentalTime { get; set; }
+        public DateTime? RentalTime { get; set; }
 
-        public DateTime ExpectedReturnTime { get; set; }
+        public DateTime? ExpectedReturnTime { get; set; }
 
-        public DateTime ReturnTime { get; set; }
+        public DateTime? ReturnTime { get; set; }
 
         public string Comment { get; set; }
     }

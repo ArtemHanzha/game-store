@@ -10,7 +10,7 @@ using EpamLibrary.DAL.Interfaces;
 
 namespace EpamLibrary.BLL.Services
 {
-    class BookService : IBookService
+    public class BookService : IBookService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IRepository<Book> _bookRepository;
