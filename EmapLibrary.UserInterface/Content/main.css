@@ -966,3 +966,61 @@ div.text-description {
     float: left;
     text-align: justify;
 }
+
+.user-menu {
+    width: 30%;
+    float: left;
+    display: inline-block;
+    background-color: red;
+}
+
+.user-content {
+    width: 70%;
+    float: left;
+    display: inline-block;
+}
+
+.user-profile {
+    min-height: 500px;
+}
+
+.user-menu-list li {
+    padding: 5px 70px 5px 0;
+    margin: 1px;
+    background-color: blue;
+}
+
+.user-menu-list a {
+    background-color: grey;
+    display: block;
+}
+
+.user-form {
+    width: 65% !important;
+}
+
+.journal-log {
+    width: 100%;
+    background-color: yellow;
+}
+
+    .journal-log > div:first-child {
+        width: 20%;
+        height: 50px;
+        display: inline-block;
+        clear: left;
+        float: left;
+    }
+
+    .journal-log > p {
+        display: block;
+        width: 150px;
+        float: left;
+    }
+
+    .journal-log > a {
+        display: block;
+        clear: left;
+        float: left;
+        text-align: left;
+    }

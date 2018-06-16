@@ -1,4 +1,5 @@
-﻿using EpamLibrary.Contracts.Models;
+﻿using EpamLibrary.Contracts.Enums;
+using EpamLibrary.Contracts.Models;
 
 namespace EpamLibrary.BLL.Interfaces
 {
@@ -6,8 +7,16 @@ namespace EpamLibrary.BLL.Interfaces
     {
         void AddUser(Consumer consumer);
 
-        void DeleteUser(int userId);
+        void DeleteConsumer(int userId);
 
-        int? Login(string login, string password);
+        void DeleteWorker(int userId);
+
+        bool Login(string login, string password);
+
+        bool UserExist(string login);
+
+        void SetAsWorker(int id, string workerNumber, WorkerType type);
+
+        void SetWorkerType(int id, WorkerType type);
     }
 }

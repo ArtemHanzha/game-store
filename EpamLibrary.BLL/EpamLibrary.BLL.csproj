@@ -52,6 +52,7 @@
     <Compile Include="Services\BookService.cs" />
     <Compile Include="Services\CommentService.cs" />
     <Compile Include="Services\JournalRecordService.cs" />
+    <Compile Include="Services\UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

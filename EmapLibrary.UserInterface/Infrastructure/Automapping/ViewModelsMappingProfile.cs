@@ -18,6 +18,7 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(c => c.ReviewerId, opt => opt.MapFrom(s => s.Reviewer.Id));
 
             CreateMap<Book, BookViewModel>()
+                .ForMember(c=>  c.Title, opt => opt.MapFrom(s => s.Title))
                 .ForMember(c => c.Description, opt => opt.MapFrom(s => s.Description))
                 .ForMember(c => c.PublicationHouse, opt => opt.MapFrom(s => s.PublicationHouse))
                 .ForMember(c => c.PublicationDate, opt => opt.MapFrom(sel => sel.DateOfPublication))

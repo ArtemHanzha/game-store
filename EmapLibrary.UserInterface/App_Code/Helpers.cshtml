@@ -1,19 +1,38 @@
-﻿@using EpamLibrary.Contracts.Models
-@helper DisplayBook(Book book)
-{
-    <div class="fourths_portfolio">
-        <h4>
-            @book.Title<br>
-            <span>see detail</span>
-        </h4>
-        <a href="#"><img src="@Href("~/Content/img/liabrary-booknotfound.png")" alt="@book.Title's front page"></a>
-    </div>
+﻿@using EmapLibrary.UserInterface.ViewModels
+@using EpamLibrary.Contracts.Models
+@helper DisplayBook(BookViewModel book)
+    {
+        <div class="fourths_portfolio">
+            <h4>
+                @book.Title<br>
+                <span>see detail</span>
+            </h4>
+            <a href="#"><img src="@Href("~/Content/img/liabrary-booknotfound.png")" alt="@book.Title's front page"></a>
+        </div>
 }
 
-@helper DisplayBooks(IEnumerable<Book> books)
-{
-    foreach (var book in books)
+@helper DisplayBooks(IEnumerable<BookViewModel> books)
     {
-        @DisplayBook(book)
-    }
+        foreach (var book in books)
+        {
+            @DisplayBook(book)
+        }
+}
+
+@helper DisplayHistoryBlock(IEnumerable<BookViewModel> books, DateTime time)
+    {
+        <div>
+            <div style="clear:both;">@time.Date.ToString()</div>
+            @Helpers.DisplayBooks(books)
+        </div>
+}
+
+@helper DisplayConsumerHistory(ConsumerViewModel consumer)
+    {
+    //TODO: this 2 helpers
+}
+
+@helper DisplayWorkerHistory(WorkerViewModel worker)
+    {
+
 }

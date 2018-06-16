@@ -5,6 +5,7 @@ namespace EmapLibrary.UserInterface.ViewModels
 {
     public class BookViewModel
     {
+        public string Title { get; set; }
         public DateTime PublicationDate { get; set; }
         public ICollection<CommentViewModel> Comments { get; set; }
         public ICollection<string> Authors { get; set; }

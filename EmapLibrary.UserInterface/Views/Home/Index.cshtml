@@ -1,4 +1,5 @@
-﻿@using EpamLibrary.Contracts.Models
+﻿@using EmapLibrary.UserInterface.ViewModels
+@using EpamLibrary.Contracts.Models
 @{
     ViewBag.Title = "Home Page";
     Layout = null;
@@ -30,10 +31,10 @@
             <div id="menu">
                 <ul>
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Catalog", "Catalog", "Home")</li>
-                    <li>@Html.ActionLink("Top 100", "Top", "Home")</li>
+                    <li>@Html.ActionLink("Catalog", "Catalog", "Book")</li>
+                    <li>@Html.ActionLink("Top 100", "Top", "Book")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Sign in", "Login", "Home")</li>
+                    <li>@Html.ActionLink("Sign in", "Login", "User")</li>
                 </ul>
             </div>
 
@@ -84,12 +85,12 @@
 
         <h3>Last reviewed</h3>
 
-        @Helpers.DisplayBooks(new List<Book>()
+        @Helpers.DisplayBooks(new List<BookViewModel>()
 {
-new Book(){Title = "Alice"},
-new Book(){Title = "Amily"},
-new Book(){Title = "Morgan"},
-new Book(){Title = "Valera"},
+new BookViewModel(){Title = "Alice"},
+new BookViewModel(){Title = "Amily"},
+new BookViewModel(){Title = "Morgan"},
+new BookViewModel(){Title = "Valera"},
 })
 
         <hr class="cleanit">
@@ -101,12 +102,12 @@ new Book(){Title = "Valera"},
 
         <h3>Newest books</h3>
 
-        @Helpers.DisplayBooks(new List<Book>()
+        @Helpers.DisplayBooks(new List<BookViewModel>()
 {
-new Book(){Title = "Alice"},
-new Book(){Title = "Amily"},
-new Book(){Title = "Morgan"},
-new Book(){Title = "Valera"},
+new BookViewModel(){Title = "Alice"},
+new BookViewModel(){Title = "Amily"},
+new BookViewModel(){Title = "Morgan"},
+new BookViewModel(){Title = "Valera"},
 })
 
         <div class="cara"></div>

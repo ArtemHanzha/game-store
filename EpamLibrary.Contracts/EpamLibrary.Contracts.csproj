@@ -47,6 +47,7 @@
     <Compile Include="Enums\LogKind.cs" />
     <Compile Include="Enums\Rating.cs" />
     <Compile Include="Enums\WorkerType.cs" />
+    <Compile Include="Exception\UserExistsException.cs" />
     <Compile Include="Models\Abstracts\AbstractDbObject.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -59,8 +60,6 @@
     <Compile Include="Models\Abstracts\AbstractUser.cs" />
     <Compile Include="Models\Tag.cs" />
     <Compile Include="Models\Worker.cs" />
-    <Compile Include="UIL\BookReviewsViewModel.cs" />
-    <Compile Include="UIL\ConsumerBooksViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
