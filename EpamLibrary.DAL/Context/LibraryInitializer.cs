@@ -46,7 +46,7 @@ namespace EpamLibrary.DAL.Context
                 new List<Book>() {db.Books.ToList()[5], db.Books.ToList()[0], db.Books.ToList()[2]};
 
             #region Consumers
-
+            /*
             db.Consumers.Add(new Consumer() { Name = "Test0", Surname = "User01", Login = "user01", Password = "0000" });
             db.Consumers.Add(new Consumer() { Name = "Test1", Surname = "User02", Login = "user02", Password = "0000" });
             db.Consumers.Add(new Consumer() { Name = "Test2", Surname = "User03", Login = "user03", Password = "0000" });
@@ -58,21 +58,105 @@ namespace EpamLibrary.DAL.Context
             db.Consumers.Add(new Consumer() { Name = "Test8", Surname = "User09", Login = "user09", Password = "0000" });
 
             db.SaveChanges();
+            */
             #endregion
 
             #region Workers
-
+            /*
             db.Workers.Add(new Worker() { Name = "TestW0", Surname = "User10", Login = "user10", Password = "0000" });
-
+            */
             #endregion
+
+            #region Users
+
+            db.Users.Add(new User()
+            {
+                Name = "Name1",
+                Surname = "Surname1",
+                LastName = "LastName1",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user1",
+                Password = "0000",
+                ReaderCardNumber = 00001,
+                UserType = UserType.Admin,
+                HiringDate = DateTime.UtcNow,
+                WorkerNumber = "123a2"
+            });
+
+            db.Users.Add(new User()
+            {
+                Name = "Name2",
+                Surname = "Surname2",
+                LastName = "LastName2",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user2",
+                Password = "0000",
+                ReaderCardNumber = 00002,
+                UserType = UserType.Consumer
+            });
+
+            db.Users.Add(new User()
+            {
+                Name = "Name3",
+                Surname = "Surname3",
+                LastName = "LastName3",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user3",
+                Password = "0000",
+                ReaderCardNumber = 00003,
+                UserType = UserType.Consumer,
+            });
+
+            db.Users.Add(new User()
+            {
+                Name = "Name4",
+                Surname = "Surname4",
+                LastName = "LastName14",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user4",
+                Password = "0000",
+                ReaderCardNumber = 00004,
+                UserType = UserType.Consumer
+            });
+
+            db.Users.Add(new User()
+            {
+                Name = "Name6",
+                Surname = "Surname7",
+                LastName = "LastName6",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user7",
+                Password = "0000",
+                ReaderCardNumber = 00006,
+                UserType = UserType.Consumer,
+            });
+
+            db.Users.Add(new User()
+            {
+                Name = "Name11",
+                Surname = "Surname11",
+                LastName = "LastName11",
+                Birthday = DateTime.UtcNow,
+                EMail = "asd@net.net",
+                Login = "user11",
+                Password = "0000",
+                ReaderCardNumber = 00011,
+                UserType = UserType.Consumer
+            });
+            #endregion 
 
             db.SaveChanges();
             #region Comments
 
-            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Consumers.ToList()[0], Book = db.Books.ToList()[1], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
-            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Consumers.ToList()[0], Book = db.Books.ToList()[3], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
-            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Consumers.ToList()[1], Book = db.Books.ToList()[4], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
-            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Consumers.ToList()[3], Book = db.Books.ToList()[3], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
+            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Users.ToList()[0], Book = db.Books.ToList()[1], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
+            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Users.ToList()[0], Book = db.Books.ToList()[3], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
+            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Users.ToList()[1], Book = db.Books.ToList()[4], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
+            db.Comments.Add(new Comment() { Rating = Rating.Medium, Review = "Norm vashe", Reviewer = db.Users.ToList()[3], Book = db.Books.ToList()[3], IsDeleted = false, PublicationDateTime = DateTime.UtcNow });
 
             #endregion
 
@@ -160,27 +244,27 @@ namespace EpamLibrary.DAL.Context
             {
                 BookInstance = db.BookInstances.ToList()[0],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[1],
                 RentalTime = DateTime.UtcNow.AddDays(-2)
             });
             db.LibraryLogRecords.Add(new LibraryLogRecord()
             {
                 BookInstance = db.BookInstances.ToList()[1],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[2],
                 RentalTime = DateTime.UtcNow.AddDays(-3)
             });
             db.LibraryLogRecords.Add(new LibraryLogRecord()
             {
                 BookInstance = db.BookInstances.ToList()[2],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[1],
                 RentalTime = DateTime.UtcNow.AddDays(-4),
                 ReturnTime = DateTime.UtcNow.AddDays(-1)
             });
@@ -188,27 +272,27 @@ namespace EpamLibrary.DAL.Context
             {
                 BookInstance = db.BookInstances.ToList()[3],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[3],
                 RentalTime = DateTime.UtcNow.AddDays(-7)
             });
             db.LibraryLogRecords.Add(new LibraryLogRecord()
             {
                 BookInstance = db.BookInstances.ToList()[4],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[5],
                 RentalTime = DateTime.UtcNow
             });
             db.LibraryLogRecords.Add(new LibraryLogRecord()
             {
                 BookInstance = db.BookInstances.ToList()[5],
                 IsDeleted = false,
-                Librariant = db.Workers.ToList()[0],
+                Librariant = db.Users.ToList()[0],
                 Comment = null,
-                Reader = db.Consumers.ToList()[0],
+                Reader = db.Users.ToList()[4],
                 RentalTime = DateTime.UtcNow
             });
 

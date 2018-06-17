@@ -8,9 +8,9 @@ namespace EmapLibrary.UserInterface.ViewModels
 
         public string BookInstanceNameTitle { get; set; }
 
-        public ConsumerViewModel Consumer { get; set; }
+        public UserViewModel User { get; set; }
 
-        public WorkerViewModel Worker { get; set; }
+        public UserViewModel Worker { get; set; }
 
         public DateTime RentalTime { get; set; }
 

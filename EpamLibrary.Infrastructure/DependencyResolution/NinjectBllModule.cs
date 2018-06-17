@@ -18,6 +18,7 @@ namespace EpamLibrary.Infrastructure.DependencyResolution
             Bind<IBookService>().To<BookService>();
             Bind<ICommentService>().To<CommentService>();
             Bind<IJournalRecordService>().To<JournalRecordService>();
+            Bind<IUserService>().To<UserService>();
         }
     }
 }

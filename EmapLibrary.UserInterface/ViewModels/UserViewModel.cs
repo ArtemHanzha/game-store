@@ -3,8 +3,12 @@ using System.Collections.Generic;
 
 namespace EmapLibrary.UserInterface.ViewModels
 {
-    public class ConsumerViewModel
+    public class UserViewModel
     {
+        public int Id { get; set; }
+
+        public string Email { get; set; }
+
         public int CardNumber { get; set; }
 
         public bool IsBlocked { get; set; }

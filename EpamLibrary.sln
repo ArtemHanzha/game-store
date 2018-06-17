@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpamLibrary.BLL", "EpamLibr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmapLibrary.UserInterface", "EmapLibrary.UserInterface\EmapLibrary.UserInterface.csproj", "{28E312F7-5CF4-43ED-B3E0-61156ED4037A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmapLibrary.Auth", "EmapLibrary.Auth\EmapLibrary.Auth.csproj", "{5968BB41-916B-4749-B674-82BC74EB8E86}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{28E312F7-5CF4-43ED-B3E0-61156ED4037A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28E312F7-5CF4-43ED-B3E0-61156ED4037A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28E312F7-5CF4-43ED-B3E0-61156ED4037A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5968BB41-916B-4749-B674-82BC74EB8E86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5968BB41-916B-4749-B674-82BC74EB8E86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5968BB41-916B-4749-B674-82BC74EB8E86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5968BB41-916B-4749-B674-82BC74EB8E86}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

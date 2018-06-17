@@ -1,5 +1,4 @@
 ﻿@using EmapLibrary.UserInterface.ViewModels
-@using EpamLibrary.Contracts.Models
 @helper DisplayBook(BookViewModel book)
     {
         <div class="fourths_portfolio">
@@ -7,7 +6,7 @@
                 @book.Title<br>
                 <span>see detail</span>
             </h4>
-            <a href="#"><img src="@Href("~/Content/img/liabrary-booknotfound.png")" alt="@book.Title's front page"></a>
+            <a href="@Href("~/Book/BookInfo?id="+book.Id)"><img src="@Href("~/Content/img/liabrary-booknotfound.png")" alt="@book.Title's front page"></a>
         </div>
 }
 
@@ -27,12 +26,46 @@
         </div>
 }
 
-@helper DisplayConsumerHistory(ConsumerViewModel consumer)
+@helper DisplayConsumerHistory(UserViewModel user)
     {
     //TODO: this 2 helpers
 }
 
-@helper DisplayWorkerHistory(WorkerViewModel worker)
-    {
+@helper DisplayComment(CommentViewModel comment)
+{
+    <div class="com">
+        <div class="com-user-info">
+            <div>@comment.ReviewerFullName</div>
+            <div> <img src="" alt="user profile photo"/> </div>
+        </div>
+        <div class="com-text">
+            <p> @comment.Review </p>
+        </div>
+    </div>
+}
 
+@helper DisplayComments(IEnumerable<CommentViewModel> coms)
+{
+    foreach (var com in coms)
+    {
+        @DisplayComment(com)
+    }
+}
+
+@helper DisplayUser(UserViewModel user)
+{
+    <div class="journal-log">
+        <div><img src="#" alt="userImg"></div>
+        <p>@user.Login</p>
+        <p>@user.FullName</p>
+        <a href="@Href("~/User/UserInfo?id="+user.Id)">edit</a>
+    </div>
+}
+
+@helper DisplayUsers(IEnumerable<UserViewModel> users)
+{
+    foreach (var user in users)
+    {
+        @DisplayUser(user)
+    }
 }

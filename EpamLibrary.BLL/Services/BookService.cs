@@ -85,5 +85,13 @@ namespace EpamLibrary.BLL.Services
             var enumerable = books.Skip(@from).Take(count).ToList();
             return enumerable;
         }
+
+        public IEnumerable<Book> GetTopBooks(int count)
+        {
+            var books = _bookRepository.Get();
+            books = books.OrderBy(b => b.BookReviews?.Sum(r => (int) r.Rating) / b.BookReviews?.Count);
+
+            return books.Take(count);
+        }
     }
 }

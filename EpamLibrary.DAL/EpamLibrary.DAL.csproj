@@ -62,25 +62,9 @@
     <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\IUnitOfWork.cs" />
     <Compile Include="Logging\LogWriter.cs" />
-    <Compile Include="Migrations\201806132251174_Initial.cs" />
-    <Compile Include="Migrations\201806132251174_Initial.Designer.cs">
-      <DependentUpon>201806132251174_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806132257355_test.cs" />
-    <Compile Include="Migrations\201806132257355_test.Designer.cs">
-      <DependentUpon>201806132257355_test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806141415158_SomeNewMigration.cs" />
-    <Compile Include="Migrations\201806141415158_SomeNewMigration.Designer.cs">
-      <DependentUpon>201806141415158_SomeNewMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806151906428_Modifie.cs" />
-    <Compile Include="Migrations\201806151906428_Modifie.Designer.cs">
-      <DependentUpon>201806151906428_Modifie.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806151920350_Modifie2.cs" />
-    <Compile Include="Migrations\201806151920350_Modifie2.Designer.cs">
-      <DependentUpon>201806151920350_Modifie2.cs</DependentUpon>
+    <Compile Include="Migrations\201806171140173_genres fix.cs" />
+    <Compile Include="Migrations\201806171140173_genres fix.Designer.cs">
+      <DependentUpon>201806171140173_genres fix.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -98,20 +82,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201806132251174_Initial.resx">
-      <DependentUpon>201806132251174_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806132257355_test.resx">
-      <DependentUpon>201806132257355_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806141415158_SomeNewMigration.resx">
-      <DependentUpon>201806141415158_SomeNewMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806151906428_Modifie.resx">
-      <DependentUpon>201806151906428_Modifie.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806151920350_Modifie2.resx">
-      <DependentUpon>201806151920350_Modifie2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201806171140173_genres fix.resx">
+      <DependentUpon>201806171140173_genres fix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

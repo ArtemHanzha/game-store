@@ -10,5 +10,7 @@ namespace EpamLibrary.Contracts.Models
     public class Genre : AbstractDbObject
     {
         public string GenreName { get; set; }
+
+        public ICollection<Book> Books { get; set; }
     }
 }

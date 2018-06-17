@@ -1,22 +1,26 @@
-﻿using EpamLibrary.Contracts.Enums;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
+using EpamLibrary.Contracts.Enums;
 using EpamLibrary.Contracts.Models;
 
 namespace EpamLibrary.BLL.Interfaces
 {
     public interface IUserService
     {
-        void AddUser(Consumer consumer);
+        void AddUser(User consumer);
 
-        void DeleteConsumer(int userId);
-
-        void DeleteWorker(int userId);
+        void DeleteUser(int userId);
 
         bool Login(string login, string password);
 
-        bool UserExist(string login);
+        bool UserExists(string login);
 
-        void SetAsWorker(int id, string workerNumber, WorkerType type);
+        void Edit(User user);
 
-        void SetWorkerType(int id, WorkerType type);
+        IEnumerable<User> Get(Expression<Func<User, bool>> predicate);
+
+        User GetById(int userId);
+        //TODO:updateUser
     }
 }

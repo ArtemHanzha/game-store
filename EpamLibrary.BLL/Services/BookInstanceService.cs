@@ -31,7 +31,7 @@ namespace EpamLibrary.BLL.Services
             instance.Book = book;
             _bookInstanceRepository.Create(instance);
             _unitOfWork.Save();
-        }
+        } //TODO: bookInstanceID instead of bookID
 
         public BookInstance GetBookInstance(int bookId)
         {

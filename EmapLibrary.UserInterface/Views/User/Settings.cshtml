@@ -1,0 +1,24 @@
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.RegistrationViewModel
+@{
+    ViewBag.Title = "Settings";
+    Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
+}
+
+<form action="/User/Edit" method="post" class="formit user-form">
+    <label for="email">Email</label>
+    <input type="text" name="email" value="@Model.Email" placeholder="e-mail">
+    <label for="password1">Password</label>
+    <input type="text" name="password1" value="@null" placeholder="********">
+    <label for="password2">Password again</label>
+    <input type="text" name="password2" value="@null" placeholder="********">
+    <label for="name">Name</label>
+    <input type="text" name="name" value="@Model.Name" placeholder="Ivan">
+    <label for="surname">Surname</label>
+    <input type="text" name="surname" value="@Model.Surname" placeholder="Ivanov">
+    <label for="lastname">Last Name</label>
+    <input type="text" name="lastname" value="@Model.LastName" placeholder="Ivanovich">
+    <label for="birthday">Birthday</label>
+    <input type="text" name="birthday" value="@Model.Birthday" placeholder="12.12.2012">
+    <input type="submit" class="button_submit" value="SAVE">
+</form>
+

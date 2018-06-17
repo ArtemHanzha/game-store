@@ -10,10 +10,10 @@ namespace EpamLibrary.Contracts.Models
     public class LibraryLogRecord : AbstractDbObject
     {
         public BookInstance BookInstance { get; set; }
-
-        public Consumer Reader { get; set; }
-
-        public Worker Librariant { get; set; }
+        //user
+        public User Reader { get; set; }
+        //workers
+        public User Librariant { get; set; }
 
         public DateTime? RentalTime { get; set; }
 

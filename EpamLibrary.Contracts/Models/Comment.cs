@@ -11,7 +11,7 @@ namespace EpamLibrary.Contracts.Models
 {
     public class Comment : AbstractDbObject
     {
-        public AbstractUser Reviewer { get; set; }
+        public User Reviewer { get; set; }
 
         public Book Book { get; set; }
 

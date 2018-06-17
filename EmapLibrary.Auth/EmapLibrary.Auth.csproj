@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6008DF3D-0B8F-47A5-BF68-8AEEA80B46F8}</ProjectGuid>
+    <ProjectGuid>{5968BB41-916B-4749-B674-82BC74EB8E86}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>EpamLibrary.Contracts</RootNamespace>
-    <AssemblyName>EpamLibrary.Contracts</AssemblyName>
+    <RootNamespace>EmapLibrary.Auth</RootNamespace>
+    <AssemblyName>EmapLibrary.Auth</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,12 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MongoDB.Bson, Version=2.3.0.157, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.3.0\lib\net45\MongoDB.Bson.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,26 +41,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\LogKind.cs" />
-    <Compile Include="Enums\Rating.cs" />
-    <Compile Include="Enums\UserType.cs" />
-    <Compile Include="Enums\WorkerType.cs" />
-    <Compile Include="Exception\UserExistsException.cs" />
-    <Compile Include="Models\Abstracts\AbstractDbObject.cs" />
-    <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\Book.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\BookInstance.cs" />
-    <Compile Include="Models\Genre.cs" />
-    <Compile Include="Models\LibraryLogRecord.cs" />
-    <Compile Include="Models\MongoDB\LogInfo.cs" />
-    <Compile Include="Models\Tag.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="CustomAuthentication.cs" />
+    <Compile Include="Interfaces\IAuthentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserIdentity.cs" />
+    <Compile Include="UserProvider.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="packages.config" />
+    <ProjectReference Include="..\EpamLibrary.Contracts\EpamLibrary.Contracts.csproj">
+      <Project>{6008DF3D-0B8F-47A5-BF68-8AEEA80B46F8}</Project>
+      <Name>EpamLibrary.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EpamLibrary.DAL\EpamLibrary.DAL.csproj">
+      <Project>{687E0405-2084-41EC-99A0-5609E691670C}</Project>
+      <Name>EpamLibrary.DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

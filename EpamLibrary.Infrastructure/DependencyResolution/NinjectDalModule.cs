@@ -20,6 +20,7 @@ namespace EpamLibrary.Infrastructure.DependencyResolution
         public override void Load()
         {
             Bind(typeof(IRepository<>)).To(typeof(GenericRepository<>));
+
             Bind<ILogger>().To<LogWriter>();
 
             Bind<LibraryContext>().ToSelf().InRequestScope()

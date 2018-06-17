@@ -1,0 +1,64 @@
+﻿@using WebGrease.Css.Extensions
+@model  EmapLibrary.UserInterface.ViewModels.BookViewModel
+
+<div id="main_part_inner">
+    <div id="main_part_inner_in">
+
+        <h2>Book info</h2>
+
+    </div>
+
+</div>
+
+
+<!-- *********  Content  ********** -->
+
+<div id="content_inner">
+
+    <!-- ***** Out team + portraits ***** -->
+
+    <h3>@Model.Title</h3>
+
+    <div>
+        <span class="book-image"> <img src="bookImg" alt="name+book image"> </span>
+        <div class="book-description">
+            Genres: @(string.Join(", ", Model.Genres.Select(s => s)))<br>
+            Authors: @(string.Join(", ", Model.Authors.Select(s => s)))<br>
+            Publication date: @Model.PublicationDate <br>
+            Publication house: @Model.PublicationHouse <br>
+            Mark: @(Model.Comments.Sum(s => s.Rating) / Model.Comments.Count) <br>
+            Top: int <br>
+        </div>
+        <div class="book-description text-description">@Model.Description</div>
+    </div>
+
+    <hr class="cleanit">
+
+    <form action="comment" method="get" class="formit comment-form">
+        <select class="form-select" name="mark" id="sel">
+            <option value="1">Worst I ever read</option>
+            <option value="2">Not recommend</option>
+            <option value="3">Not bad, not bad</option>
+            <option value="4">Recommed</option>
+            <option value="5">Best book ever. 10/10</option>
+        </select>
+        <textarea class="comment-text" name="text" id="txt" cols="30" rows="10" placeholder="Your comment"></textarea>
+        <input type="submit" class="button_submit left-formated" value="POST">
+    </form>
+
+    <hr class="cleanit">
+
+    @Helpers.DisplayComments(Model.Comments)
+
+</div>
+
+<hr class="cleanit">
+
+<!-- ** Pagination ** -->
+
+<ul class="pagination">
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#" class="active">3</a></li>
+    <li><a href="#">4</a></li>
+</ul>

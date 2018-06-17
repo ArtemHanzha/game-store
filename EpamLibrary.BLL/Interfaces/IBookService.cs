@@ -20,5 +20,7 @@ namespace EpamLibrary.BLL.Interfaces
         IEnumerable<Book> GetBooks(Expression<Func<Book, bool>> predicate = null,
                                    int from = 0, 
                                    int count = 10);
+
+        IEnumerable<Book> GetTopBooks(int count);
     }
 }

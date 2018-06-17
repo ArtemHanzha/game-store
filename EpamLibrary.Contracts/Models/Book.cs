@@ -22,6 +22,8 @@ namespace EpamLibrary.Contracts.Models
 
         public ICollection<Author> Authors { get; set; }
 
+        public ICollection<Genre> Genres { get; set; }
+
         public DateTime? DateOfPublication
         {
             get => _dateOfPublication?.Date;

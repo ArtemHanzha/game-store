@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using EpamLibrary.BLL.Interfaces;
 using EpamLibrary.Contracts.Enums;
 using EpamLibrary.Contracts.Exception;
@@ -12,45 +14,49 @@ namespace EpamLibrary.BLL.Services
     public class UserService : IUserService
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IRepository<Consumer> _consumeRepository;
-        private readonly IRepository<Worker> _workerRepository;
+       // private readonly IRepository<Consumer> _consumeRepository;
+       // private readonly IRepository<Worker> _workerRepository;
+        private readonly IRepository<User> _userRepository;
 
         public UserService(
-            IRepository<Worker> workerRepository, 
-            IRepository<Consumer> consumeRepository, 
-            IUnitOfWork unitOfWork)
+            // IRepository<Worker> workerRepository, 
+            // IRepository<Consumer> consumeRepository, 
+            IUnitOfWork unitOfWork, 
+            IRepository<User> userRepository)
         {
-            _workerRepository = workerRepository;
-            _consumeRepository = consumeRepository;
+            //_workerRepository = workerRepository;
+            //_consumeRepository = consumeRepository;
+
             _unitOfWork = unitOfWork;
+            _userRepository = userRepository;
         }
 
-        public void AddUser(Consumer consumer)
+        public void AddUser(User consumer)
         {
-            if(UserExist(consumer.Login))
+            if(UserExists(consumer.Login))
                 throw new UserExistsException();
 
-            _consumeRepository.Create(consumer);
+            //_consumeRepository.Create(consumer);
+            _userRepository.Create(consumer);
         }
 
-        public void DeleteConsumer(int userId)
+        
+        public void DeleteUser(int userId)
         {
-            _consumeRepository.Delete(userId);
-        }
+            var user = _userRepository.GetById(userId);
+            
+             if(user.UserType != UserType.Consumer)
 
-        public void DeleteWorker(int userId)
-        {
-            if(_workerRepository.Get().Count() <= 1)
-                _workerRepository.Delete(userId);
+            _userRepository.Delete(userId);
         }
 
         public bool Login(string login, string password)
         {
-            if (_consumeRepository.Get(c => c.Login == login).Any())
+            if (_userRepository.Get(c => c.Login == login).Any())
             {
                 //TODO: login
             }
-            else if (_workerRepository.Get(w => w.Login == login).Any())
+            else if (_userRepository.Get(w => w.Login == login).Any())
             {
 
             }
@@ -61,17 +67,12 @@ namespace EpamLibrary.BLL.Services
 
             return false;
         }
-
-        public bool UserExist(string login)
+       
+        public void SetAsWorker(int id, string workerNumber, UserType type)
         {
-            return WorkerExists(login) || ConsumerExists(login);
-        }
-
-        public void SetAsWorker(int id, string workerNumber, WorkerType type)
-        {
-            var user = _consumeRepository.GetById(id);
-            _consumeRepository.Delete(id);
-            Worker worker = new Worker()
+            var user = _userRepository.GetById(id);
+            _userRepository.Delete(id);
+            var worker = new User()
             {
                 Birthday = user.Birthday,
                 BooksHistory = user.BooksHistory,
@@ -84,22 +85,15 @@ namespace EpamLibrary.BLL.Services
                 Password = user.Password,
                 Surname = user.Surname,
                 WorkerNumber = workerNumber,
-                WorkerType = type
+                UserType = type
             };
-            _workerRepository.Create(worker);
+            _userRepository.Create(worker);
         }
 
-        public void SetWorkerType(int id, WorkerType type)
+        public bool UserExists(string login)
         {
-            var worker = _workerRepository.GetById(id);
-            worker.WorkerType = type;
-            _workerRepository.Update(worker);
-        }
-
-        private bool ConsumerExists(string login)
-        {
-           var users= _consumeRepository.Get(c => c.Login == login);
-            var enumerable = users as Consumer[] ?? users.ToArray();
+           var users= _userRepository.Get(c => c.Login == login);
+            var enumerable = users as User[] ?? users.ToArray();
             if (!enumerable.Any())
                 return false;
             else if (enumerable.Count() > 1)
@@ -109,17 +103,29 @@ namespace EpamLibrary.BLL.Services
                 return true;
         }
 
-        private bool WorkerExists(string login)
+        public void Edit(User user)
         {
-            var users = _workerRepository.Get(c => c.Login == login);
-            var enumerable = users as Worker[] ?? users.ToArray();
-            if (!enumerable.Any())
-                return false;
-            else if (enumerable.Count() > 1)
-                //TODO:write log
-                return true;
-            else
-                return true;
+            var us = _userRepository.GetById(user.Id);
+            us.Name = user.Name;
+            us.Surname = user.Surname;
+            us.LastName = user.LastName;
+            us.EMail = user.EMail;
+            us.Birthday = user.Birthday;
+            us.Password = user.Password;
+            us.UserType = user.UserType;
+            us.WorkerNumber = user.WorkerNumber;
+            us.ReaderCardNumber = user.ReaderCardNumber;
+            _userRepository.Update(us);
+        }
+
+        public IEnumerable<User> Get(Expression<Func<User, bool>> predicate)
+        {
+            return _userRepository.Get(predicate);
+        }
+
+        public User GetById(int userId)
+        {
+            return _userRepository.GetById(userId);
         }
     }
 }

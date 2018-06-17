@@ -10,5 +10,7 @@ namespace EpamLibrary.Contracts.Models
     public class Tag : AbstractDbObject
     {
         public string TagName { get; set; }
+
+        public ICollection<Book> Books { get; set; }
     }
 }
