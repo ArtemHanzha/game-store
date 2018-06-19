@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using EmapLibrary.UserInterface.ViewModels.Abstract;
 
 namespace EmapLibrary.UserInterface.ViewModels
 {
-    public class BookViewModel
+    public class BookViewModel : BaseViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }

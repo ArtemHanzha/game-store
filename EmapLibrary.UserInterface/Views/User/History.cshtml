@@ -1,8 +1,10 @@
-﻿@model EmapLibrary.UserInterface.ViewModels.UserViewModel
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.UserBooksViewModel
 @{
     ViewBag.Title = "History";
     Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
 }
 
-@Helpers.DisplayBooks(Model.BooksHistory)
+@Helpers.DisplayConsumerHistory(Model)
+
+@Helpers.DisplayPage(Model.PageCount, Model.Current)
 

@@ -1,4 +1,5 @@
 ﻿@using EmapLibrary.UserInterface.ViewModels
+@using EmapLibrary.UserInterface.ViewModels.Internal
 @helper DisplayBook(BookViewModel book)
     {
         <div class="fourths_portfolio">
@@ -26,46 +27,105 @@
         </div>
 }
 
-@helper DisplayConsumerHistory(UserViewModel user)
+@helper DisplayConsumerHistory(UserBooksViewModel model)
     {
-    //TODO: this 2 helpers
+
+        foreach (var valuePair in model.HistoryDictionary)
+        {
+            <div>
+                <div style="clear:both;">@valuePair.Key</div>
+                @{
+                    @DisplayBooks(valuePair.Value)
+                }
+            </div>
+        }
 }
 
 @helper DisplayComment(CommentViewModel comment)
-{
-    <div class="com">
-        <div class="com-user-info">
-            <div>@comment.ReviewerFullName</div>
-            <div> <img src="" alt="user profile photo"/> </div>
+    {
+        <div class="com">
+            <div class="com-user-info">
+                <div>@comment.Reviewer.FullName</div>
+                <div> <img src="" alt="user profile photo" /> </div>
+            </div>
+            <div class="com-text">
+                <p> @comment.Review </p>
+            </div>
         </div>
-        <div class="com-text">
-            <p> @comment.Review </p>
-        </div>
-    </div>
 }
 
 @helper DisplayComments(IEnumerable<CommentViewModel> coms)
-{
-    foreach (var com in coms)
     {
-        @DisplayComment(com)
-    }
+        foreach (var com in coms)
+        {
+            @DisplayComment(com)
+        }
 }
 
 @helper DisplayUser(UserViewModel user)
-{
-    <div class="journal-log">
-        <div><img src="#" alt="userImg"></div>
-        <p>@user.Login</p>
-        <p>@user.FullName</p>
-        <a href="@Href("~/User/UserInfo?id="+user.Id)">edit</a>
-    </div>
+    {
+        <div class="journal-log">
+            <div><img src="#" alt="userImg"></div>
+            <p>@user.Login</p>
+            <p>@user.FullName</p>
+            <a href="@Href("~/User/UserInfo?id="+user.Id)">edit</a>
+        </div>
 }
 
 @helper DisplayUsers(IEnumerable<UserViewModel> users)
-{
-    foreach (var user in users)
     {
-        @DisplayUser(user)
-    }
+        foreach (var user in users)
+        {
+            @DisplayUser(user)
+        }
+}
+
+@helper DisplayJournal(LibraryLogRecordViewModel record)
+    {
+        <div class="journal-log">
+            <div><img src="#" alt="BookImage.jpg"></div>
+            <p>@record.User.FullName</p>
+            <p>@record.BookInstanceNameTitle/No:@record.BookInstacneNumber</p>
+            <p>@record.RentalTime - @record.ExpectedReturnTime / @record.RealReturnTime</p>
+            <a href="#editLog">edit</a>
+        </div>
+}
+
+@helper DisplayJournalLogs(IEnumerable<LibraryLogRecordViewModel> records)
+    {
+        foreach (var record in records)
+        {
+            @DisplayJournal(record)
+        }
+}
+
+@helper DisplayPage(int count, int current)
+    {
+        <ul class="pagination">
+            @if (count < 5)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    <li><a href="#" class="@(i==current?"active":null)">@i</a></li>
+                }
+            }
+            else
+            {
+                if (current > 2)
+                {
+                    <li><a href="#">first</a>...</li>
+                    <li><a href="#">@(current - 1)</a></li>
+                    <li><a href="#" class="active">@current</a></li>
+                    <li><a href="#">@(current + 1)</a></li>
+                    <li>...<a href="#">last</a></li>
+                }
+                else
+                {
+                    <li><a href="#" class="@(1==current?"active":null)">1</a>...</li>
+                    <li><a href="#" class="@(2==current?"active":null)">2</a>...</li>
+                    <li>...<a href="#">next</a>...</li>
+                    <li><a href="#">last</a>...</li>
+                }
+            }
+        </ul>
 }

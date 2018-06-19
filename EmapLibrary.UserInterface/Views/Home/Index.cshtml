@@ -1,7 +1,7 @@
 ﻿@using EmapLibrary.UserInterface.ViewModels
-@using EpamLibrary.Contracts.Models
+@model EmapLibrary.UserInterface.ViewModels.Internal.HomeViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Home CurrentPage";
     Layout = null;
 }
 
@@ -26,7 +26,7 @@
     <div id="header">
         <div id="header_in">
 
-            <h1><a href="index.html"><b>FINAL</b> TASK</a></h1>
+            <h1><a href="@Href("~/Home/Index")"><b>FINAL</b> TASK</a></h1>
 
             <div id="menu">
                 <ul>
@@ -34,7 +34,17 @@
                     <li>@Html.ActionLink("Catalog", "Catalog", "Book")</li>
                     <li>@Html.ActionLink("Top 100", "Top", "Book")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Sign in", "Login", "User")</li>
+                    @{
+                        if (Model.IsLogged)
+                        {
+                            <li>@Html.ActionLink("Cabinet", "UserInfo", "User")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Sign in", "Login", "Base")</li>
+                        }
+                    }
+                   
                 </ul>
             </div>
 
@@ -78,37 +88,25 @@
 
         <div class="banner1">
             <p>Take a look on <b>last reviewed books</b>.<p>
-                <a href="catalog.html" class="button_dark">SEE ALL</a>
+                <a href="@Href("/Book/Catalog")" class="button_dark">SEE ALL</a>
         </div>
 
         <!-- ****  Recent works  ***** -->
 
         <h3>Last reviewed</h3>
 
-        @Helpers.DisplayBooks(new List<BookViewModel>()
-{
-new BookViewModel(){Title = "Alice"},
-new BookViewModel(){Title = "Amily"},
-new BookViewModel(){Title = "Morgan"},
-new BookViewModel(){Title = "Valera"},
-})
+        @Helpers.DisplayBooks(Model.LastReviewed)
 
         <hr class="cleanit">
 
         <div class="banner1">
             <p>Take a look on <b>newest books</b> in library.<p>
-                <a href="catalog.html" class="button_dark">CATALOG</a>
+                <a href="@Href("/Book/Catalog")" class="button_dark">CATALOG</a>
         </div>
 
         <h3>Newest books</h3>
 
-        @Helpers.DisplayBooks(new List<BookViewModel>()
-{
-new BookViewModel(){Title = "Alice"},
-new BookViewModel(){Title = "Amily"},
-new BookViewModel(){Title = "Morgan"},
-new BookViewModel(){Title = "Valera"},
-})
+        @Helpers.DisplayBooks(Model.NewestBooks)
 
         <div class="cara"></div>
 

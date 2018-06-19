@@ -11,9 +11,7 @@ namespace EpamLibrary.BLL.Interfaces
         void AddUser(User consumer);
 
         void DeleteUser(int userId);
-
-        bool Login(string login, string password);
-
+        
         bool UserExists(string login);
 
         void Edit(User user);
@@ -21,6 +19,7 @@ namespace EpamLibrary.BLL.Interfaces
         IEnumerable<User> Get(Expression<Func<User, bool>> predicate);
 
         User GetById(int userId);
-        //TODO:updateUser
+
+        Dictionary<DateTime, ICollection<Book>> GetUserBooks(int id);
     }
 }

@@ -22,5 +22,9 @@ namespace EpamLibrary.BLL.Interfaces
                                    int count = 10);
 
         IEnumerable<Book> GetTopBooks(int count);
+
+        IEnumerable<Book> GetLastReviewedBooks();
+
+        IEnumerable<Book> GetNewestBooks();
     }
 }

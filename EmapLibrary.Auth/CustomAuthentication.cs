@@ -53,8 +53,16 @@ namespace EmapLibrary.Auth
 
         public User Login(string login, string password, bool stayLogged)
         {
-            var user = _userRepository.Get()
-                .First(f => string.Compare(f.Login, login, StringComparison.OrdinalIgnoreCase) == 0);
+            var users = _userRepository.Get();
+            User user = null;
+            try
+            {
+                user = users.First(f => string.Compare(f?.Login, login, StringComparison.OrdinalIgnoreCase) == 0);
+            }
+            catch
+            {
+                return null;
+            }
 
             if (user == null || password != user.Password)
                 return null;

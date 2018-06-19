@@ -1,0 +1,24 @@
+﻿@model EmapLibrary.UserInterface.ViewModels.LibraryLogRecordViewModel
+@{
+    ViewBag.Title = "LogSetup";
+    Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
+}
+
+<form action="/User/LogEdit" class="formit user-form">
+    <label for="instanceNumber">Instance number</label>
+    <input type="text" name="instanceNumber" value="@Model.BookInstacneNumber" placeholder="12345678">
+    <label for="instanceTitle">Book title</label>
+    <input type="text" name="instanceTitle" value="@Model.BookInstanceNameTitle" placeholder="Alice in wonderland">
+    <label for="userId">User ID</label>
+    <input type="text" name="userId" value="@Model.User.Id" placeholder="1234567">
+    <label for="workerId">Worker ID</label>
+    <input type="text" name="workerId" value="@Model.Worker.Id" placeholder="12345667">
+    <label for="rentalTime">Rental time</label>
+    <input type="text" name="rentalTime" value="@Model.RentalTime" placeholder="12.12.12">
+    <label for="expectedTime">Expected return time</label>
+    <input type="text" name="expectedTime" value="@Model.ExpectedReturnTime" placeholder="12.12.12">
+    <label for="realTime">Real return time</label>
+    <input type="text" name="realTime" value="@Model.RealReturnTime" placeholder="12.12.12">
+    <input type="submit" value="SAVE" class="button_submit">
+</form>
+

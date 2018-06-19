@@ -168,6 +168,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Ninject.Web.Common.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -177,14 +178,18 @@
     <Compile Include="Infrastructure\Authorization\AuthHttmModule.cs" />
     <Compile Include="Infrastructure\Automapping\ViewModelsMappingProfile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\Abstract\BaseViewModel.cs" />
     <Compile Include="ViewModels\BookViewModel.cs" />
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\Enums\ActiveSortFilter.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
+    <Compile Include="ViewModels\Internal\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Internal\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Internal\UserBooksViewModel.cs" />
     <Compile Include="ViewModels\Internal\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="ViewModels\Internal\RegistrationViewModel.cs" />
+    <Compile Include="ViewModels\RegistrationViewModel.cs" />
     <Compile Include="ViewModels\LibraryLogRecordViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,7 +253,7 @@
     <Content Include="Views\Book\Catalog.cshtml" />
     <Content Include="Views\Book\Top.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\User\Login.cshtml" />
+    <Content Include="Views\Base\Login.cshtml" />
     <Content Include="Views\User\Registration.cshtml" />
     <Content Include="Views\Shared\_UserPrifileLayout.cshtml" />
     <Content Include="Views\User\UserInfo.cshtml" />
@@ -257,6 +262,8 @@
     <Content Include="Views\Book\BookSetup.cshtml" />
     <Content Include="Views\User\UserList.cshtml" />
     <Content Include="Views\User\History.cshtml" />
+    <Content Include="Views\User\Journal.cshtml" />
+    <Content Include="Views\User\LogSetup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -271,7 +278,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>

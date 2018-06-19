@@ -45,6 +45,7 @@ namespace EmapLibrary.UserInterface.App_Start
             {
                 new NinjectDalModule("Library"),//connection
                 new NinjectBllModule(),
+                new NinjectAuthModule()
             };
 
             var kernel = new StandardKernel(modules);

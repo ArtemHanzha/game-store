@@ -46,11 +46,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DependencyResolution\NinjectAuthModule.cs" />
     <Compile Include="DependencyResolution\NinjectBllModule.cs" />
     <Compile Include="DependencyResolution\NinjectDalModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EmapLibrary.Auth\EmapLibrary.Auth.csproj">
+      <Project>{5968bb41-916b-4749-b674-82bc74eb8e86}</Project>
+      <Name>EmapLibrary.Auth</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EpamLibrary.BLL\EpamLibrary.BLL.csproj">
       <Project>{45f7c8a4-931c-4700-a3fe-2cefe7730816}</Project>
       <Name>EpamLibrary.BLL</Name>

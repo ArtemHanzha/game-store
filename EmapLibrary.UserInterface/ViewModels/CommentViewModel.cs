@@ -2,11 +2,9 @@
 {
     public class CommentViewModel
     {
-        public string ReviewerFullName { get; set; }
-        
-        public int ReviewerId { get; set; }
+        public UserViewModel Reviewer { get; set; }
 
-        public int BookId { get; set; }
+        public BookViewModel Book { get; set; }
 
         public string Review { get; set; }
 

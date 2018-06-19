@@ -63,5 +63,10 @@ namespace EpamLibrary.BLL.Services
 
             return log.Skip(from).Take(count).ToList();
         }
+
+        public void Edit(LibraryLogRecord record)
+        {
+            _logRepository.Update(record);
+        }
     }
 }

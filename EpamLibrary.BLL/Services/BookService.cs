@@ -93,5 +93,20 @@ namespace EpamLibrary.BLL.Services
 
             return books.Take(count);
         }
+
+        public IEnumerable<Book> GetLastReviewedBooks()
+        {
+            var enumerable = _bookRepository.Get().OrderByDescending(b =>
+            {
+                return b.BookReviews?.OrderByDescending(r => r.PublicationDateTime).First().PublicationDateTime;
+            }).Take(4);
+            return enumerable;
+        }
+
+        public IEnumerable<Book> GetNewestBooks()
+        {
+            var books = _bookRepository.Get().OrderByDescending(b => b.Id).Take(4);
+            return books;
+        }
     }
 }

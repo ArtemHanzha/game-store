@@ -4,7 +4,7 @@ namespace EpamLibrary.BLL.Interfaces
 {
     public interface IBookInstanceService
     {
-        void AddBookInstance(int bookId, BookInstance instance);
+        void AddBookInstance(int bookInstanceId, BookInstance instance);
 
         BookInstance GetBookInstance(int bookId);
 

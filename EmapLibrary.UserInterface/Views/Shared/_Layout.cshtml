@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <title>EPAM Library</title>
 
-     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/css")
 
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -18,7 +18,7 @@
     <div id="header">
         <div id="header_in">
 
-            <h1><a href="index.html"><b>FINAL</b> TASK</a></h1>
+            <h1><a href="@Href("~/Home/Index")"><b>FINAL</b> TASK</a></h1>
 
             <div id="menu">
                 <ul>
@@ -26,7 +26,17 @@
                     <li>@Html.ActionLink("Catalog", "Catalog", "Book")</li>
                     <li>@Html.ActionLink("Top 100", "Top", "Book")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Sing in", "Login", "User")</li>
+                    @{
+                        if (Model.IsLogged)
+                        {
+                            <li>@Html.ActionLink("Cabinet", "UserInfo", "User")</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("Sing in", "Login", "Base")</li>
+                        }
+                    }
+
                 </ul>
             </div>
 
@@ -34,8 +44,6 @@
     </div>
 
     <!-- *********  Main part – headline ********** -->
-
-
     <!--div id="main_part_inner">
         <div id="main_part_inner_in">
 
@@ -44,11 +52,9 @@
         </div>
 
     </div-->
-
-
     <!-- *********  Content  ********** -->
 
-        @RenderBody()
+    @RenderBody()
 
 
 

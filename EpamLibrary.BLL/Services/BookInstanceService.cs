@@ -25,13 +25,13 @@ namespace EpamLibrary.BLL.Services
             _unitOfWork = unitOfWork;
         }
 
-        public void AddBookInstance(int bookId, BookInstance instance)
+        public void AddBookInstance(int bookInstanceId, BookInstance instance)
         {
-            var book = _bookRepository.GetById(bookId);
+            var book = _bookRepository.GetById(bookInstanceId);
             instance.Book = book;
             _bookInstanceRepository.Create(instance);
             _unitOfWork.Save();
-        } //TODO: bookInstanceID instead of bookID
+        }
 
         public BookInstance GetBookInstance(int bookId)
         {

@@ -1,5 +1,6 @@
-﻿@using WebGrease.Css.Extensions
-@model  EmapLibrary.UserInterface.ViewModels.BookViewModel
+﻿@model  EmapLibrary.UserInterface.ViewModels.BookViewModel
+@{
+}
 
 <div id="main_part_inner">
     <div id="main_part_inner_in">
@@ -26,25 +27,32 @@
             Authors: @(string.Join(", ", Model.Authors.Select(s => s)))<br>
             Publication date: @Model.PublicationDate <br>
             Publication house: @Model.PublicationHouse <br>
-            Mark: @(Model.Comments.Sum(s => s.Rating) / Model.Comments.Count) <br>
+            Mark: @(Model.Comments.Count <= 0 ? "No reviews yet" : (Model.Comments.Sum(s => s.Rating) / Model.Comments.Count).ToString())<br>
             Top: int <br>
         </div>
         <div class="book-description text-description">@Model.Description</div>
     </div>
 
     <hr class="cleanit">
-
-    <form action="comment" method="get" class="formit comment-form">
-        <select class="form-select" name="mark" id="sel">
-            <option value="1">Worst I ever read</option>
-            <option value="2">Not recommend</option>
-            <option value="3">Not bad, not bad</option>
-            <option value="4">Recommed</option>
-            <option value="5">Best book ever. 10/10</option>
-        </select>
-        <textarea class="comment-text" name="text" id="txt" cols="30" rows="10" placeholder="Your comment"></textarea>
-        <input type="submit" class="button_submit left-formated" value="POST">
-    </form>
+    
+    @{
+        if (Model.IsLogged)
+        {
+            <form action="SetComment" method="get" class="formit comment-form">
+                <input type="text" value="@Model.Id" name="bookId" style="display: none;"/>
+                <select class="form-select" name="mark" id="sel">
+                    <option value="1">Worst I ever read</option>
+                    <option value="2">Not recommend</option>
+                    <option value="3">Not bad, not bad</option>
+                    <option value="4">Recommed</option>
+                    <option value="5">Best book ever. 10/10</option>
+                </select>
+                <textarea class="comment-text" name="text" id="txt" cols="30" rows="10" placeholder="Your comment"></textarea>
+                <input type="submit" class="button_submit left-formated" value="POST">
+            </form>
+        }
+    }
+    
 
     <hr class="cleanit">
 
