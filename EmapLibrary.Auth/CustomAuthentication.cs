@@ -15,7 +15,9 @@ namespace EmapLibrary.Auth
     public class CustomAuthentication : IAuthentication
     {
         private const string CookieName = "__LIBRARY_AUTH_COOKIE";
+
         private IPrincipal _currentUser;
+
         private readonly IRepository<User> _userRepository;
 
         public CustomAuthentication(IRepository<User> userRepository)
@@ -40,7 +42,8 @@ namespace EmapLibrary.Auth
 
                 try
                 {
-                    _currentUser = new UserProvider(authCookie.Value, _userRepository);
+                    var ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                    _currentUser = new UserProvider(ticket.Name, _userRepository);
                 }
                 catch
                 {
@@ -79,7 +82,7 @@ namespace EmapLibrary.Auth
 
             var authCookie = new HttpCookie(CookieName)
             {
-                Value = ticket.ToString(),
+                Value = FormsAuthentication.Encrypt(ticket),
                 Expires = ticket.Expiration
             };
 

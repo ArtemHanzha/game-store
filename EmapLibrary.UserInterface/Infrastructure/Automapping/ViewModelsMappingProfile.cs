@@ -4,6 +4,7 @@ using System.Linq;
 using AutoMapper;
 using EmapLibrary.UserInterface.ViewModels;
 using EmapLibrary.UserInterface.ViewModels.Internal;
+using EpamLibrary.Contracts.Enums;
 using EpamLibrary.Contracts.Models;
 
 namespace EmapLibrary.UserInterface.Infrastructure.Automapping
@@ -79,15 +80,6 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(c => c.Book, opt => opt.MapFrom(s => Mapper.Map<BookViewModel, Book>(s.Book))); //TODO: change this map
             #endregion
 
-            #region RegistrationVM -> user
-            CreateMap<RegistrationViewModel, User>()
-                .ForMember(r => r.EMail, opt => opt.MapFrom(s => s.Email))
-                .ForMember(r => r.Name, opt => opt.MapFrom(s => s.Name))
-                .ForMember(r => r.Surname, opt => opt.MapFrom(s => s.Surname))
-                .ForMember(r => r.LastName, opt => opt.MapFrom(s => s.LastName))
-                .ForMember(r => r.UserType, opt => opt.Ignore());
-            #endregion
-
             //TODO: map for string - author
             //TODO: map for string - Tag
             //TODO: map for string - Genre
@@ -102,6 +94,37 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(b => b.Genres, opt => opt.MapFrom(s => Mapper.Map<IEnumerable<string>, IEnumerable<Genre>>(s.Genres)))
                 .ForMember(b => b.Tags, opt => opt.MapFrom(s => Mapper.Map<IEnumerable<string>, IEnumerable<Tag>>(s.Tags)))
                 .ForMember(b=> b.Title, opt => opt.MapFrom(s => s.Title));
+
+            #endregion
+
+            #region RegistrationVM -> user
+
+            CreateMap<RegistrationViewModel, User>()
+                .ForMember(u => u.EMail, opt => opt.MapFrom(s => s.Email))
+                .ForMember(u => u.Login, opt => opt.MapFrom(s => s.Login))
+                .ForMember(u => u.Password, opt => opt.MapFrom(s => s.Password))
+                .ForMember(u => u.Name, opt => opt.MapFrom(s => s.Name))
+                .ForMember(u => u.Surname, opt => opt.MapFrom(s => s.Surname))
+                .ForMember(u => u.LastName, opt => opt.MapFrom(s => s.LastName))
+                .ForMember(u => u.Birthday, opt => opt.MapFrom(s => DateTime.Parse(s.Birthday)))
+                .ForMember(u => u.UserType, opt => opt.MapFrom(s => UserType.Consumer));
+
+            #endregion
+
+            #region UserSettingsVM -> User
+
+            CreateMap<UserSettingsViewModel, User>()
+                .ForMember(u => u.EMail, opt => opt.MapFrom(s => s.Email))
+                .ForMember(u => u.Name, opt => opt.MapFrom(s => s.Name))
+                .ForMember(u => u.Surname, opt => opt.MapFrom(s => s.Surname))
+                .ForMember(u => u.LastName, opt => opt.MapFrom(s => s.LastName))
+                .ForMember(u => u.Password, opt => opt.MapFrom(s => s.Password))
+                .ForMember(u => u.Birthday, opt => opt.MapFrom(s => s.Birthday.Date))
+                .ForMember(u => u.HiringDate, opt => opt.Ignore())
+                .ForMember(u => u.Login, opt => opt.Ignore())
+                .ForMember(u => u.WorkerNumber, opt => opt.Ignore())
+                .ForMember(u => u.UserType, opt => opt.Ignore())
+                .ForMember(u => u.Id, opt => opt.Ignore());
 
             #endregion
         }

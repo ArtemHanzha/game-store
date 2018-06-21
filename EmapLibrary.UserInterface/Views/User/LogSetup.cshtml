@@ -1,8 +1,15 @@
-﻿@model EmapLibrary.UserInterface.ViewModels.LibraryLogRecordViewModel
+﻿@using EpamLibrary.Contracts.Enums
+@model EmapLibrary.UserInterface.ViewModels.LibraryLogRecordViewModel
 @{
     ViewBag.Title = "LogSetup";
     Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
 }
+
+
+    @if (User.IsInRole(nameof(UserType.Moderator)))
+    {
+
+    }
 
 <form action="/User/LogEdit" class="formit user-form">
     <label for="instanceNumber">Instance number</label>

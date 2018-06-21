@@ -1,24 +1,24 @@
-﻿@model EmapLibrary.UserInterface.ViewModels.Internal.RegistrationViewModel
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.UserSettingsViewModel
 @{
     ViewBag.Title = "Settings";
     Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
 }
 
-<form action="/User/Edit" method="post" class="formit user-form">
+<form action="/User/Settings" method="post" class="formit user-form">
     <label for="email">Email</label>
-    <input type="text" name="email" value="@Model.Email" placeholder="e-mail">
+    <input type="text" name="email" value="@Model.Email" placeholder="e-mail" class="@(Model.IsEmailError? "error" : null)">
     <label for="password1">Password</label>
-    <input type="text" name="password1" value="@null" placeholder="********">
+    <input type="password" name="password1" value="@null" placeholder="********" class="@(Model.IsPassError? "error" : null)">
     <label for="password2">Password again</label>
-    <input type="text" name="password2" value="@null" placeholder="********">
+    <input type="password" name="password2" value="@null" placeholder="********" class="@(Model.IsPassError? "error" : null)">
     <label for="name">Name</label>
-    <input type="text" name="name" value="@Model.Name" placeholder="Ivan">
+    <input type="text" name="name" value="@Model.Name" placeholder="Ivan" class="@(Model.IsNameError? "error" : null)">
     <label for="surname">Surname</label>
-    <input type="text" name="surname" value="@Model.Surname" placeholder="Ivanov">
+    <input type="text" name="surname" value="@Model.Surname" placeholder="Ivanov" class="@(Model.IsSurnameError? "error" : null)">
     <label for="lastname">Last Name</label>
-    <input type="text" name="lastname" value="@Model.LastName" placeholder="Ivanovich">
+    <input type="text" name="lastname" value="@Model.LastName" placeholder="Ivanovich" class="@(Model.IsLastNameError? "error" : null)">
     <label for="birthday">Birthday</label>
-    <input type="text" name="birthday" value="@Model.Birthday" placeholder="12.12.2012">
+    <input type="text" name="birthday" value="@(Model.IsBirthdayError ? Model.StringBirthday : Model.Birthday.Date.ToShortDateString())" placeholder="DD/MM/YYYY or DD/MM/YY" class="@(Model.IsBirthdayError? "error" : null)">
     <input type="submit" class="button_submit" value="SAVE">
 </form>
 

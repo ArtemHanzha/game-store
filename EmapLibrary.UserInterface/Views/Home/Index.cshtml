@@ -1,4 +1,5 @@
-﻿@using EmapLibrary.UserInterface.ViewModels
+﻿@using System.Web.Mvc.Html
+@using System.Web.Optimization
 @model EmapLibrary.UserInterface.ViewModels.Internal.HomeViewModel
 @{
     ViewBag.Title = "Home CurrentPage";
@@ -35,7 +36,7 @@
                     <li>@Html.ActionLink("Top 100", "Top", "Book")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     @{
-                        if (Model.IsLogged)
+                        if (User.Identity.IsAuthenticated)
                         {
                             <li>@Html.ActionLink("Cabinet", "UserInfo", "User")</li>
                         }

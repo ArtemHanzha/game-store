@@ -5,7 +5,7 @@ using System.Web.Mvc;
 
 namespace EmapLibrary.UserInterface.Infrastructure.Authorization
 {
-    public class AuthHttmModule : IHttpModule
+    public class AuthHttpModule : IHttpModule
     {
         public void Init(HttpApplication context)
         {

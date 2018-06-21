@@ -8,6 +8,7 @@ using EmapLibrary.Auth.Interfaces;
 using EmapLibrary.UserInterface.ViewModels;
 using EmapLibrary.UserInterface.ViewModels.Internal;
 using EpamLibrary.BLL.Interfaces;
+using EpamLibrary.Contracts.Enums;
 using EpamLibrary.Contracts.Models;
 
 namespace EmapLibrary.UserInterface.Controllers
@@ -41,6 +42,7 @@ namespace EmapLibrary.UserInterface.Controllers
             //TODO: datetime regex
             var regViewModel = new RegistrationViewModel
             {
+                Password = password1,
                 Name = name,
                 Surname = surname,
                 LastName = lastname,
@@ -55,9 +57,8 @@ namespace EmapLibrary.UserInterface.Controllers
 
             if (!regViewModel.HaveError())
             {
-                //correct. Go next page
-                //TODO: add user to database
-                return Redirect("Login");
+                _userService.AddUser(Mapper.Map<RegistrationViewModel, User>(regViewModel));
+                return RedirectToAction("Login", "Base");
             }
             else
             {
@@ -65,7 +66,24 @@ namespace EmapLibrary.UserInterface.Controllers
             }
         }
 
-        public ActionResult Edit(
+        [HttpGet]
+        public ActionResult Settings(UserSettingsViewModel settings = null)
+        {
+            if(settings == null || settings.IsFirstIn)
+            {
+                if (_auth.User == null)
+                    return HttpNotFound();
+                var us = Mapper.Map<User, UserViewModel>(_userService.GetById(_auth.User.Id));
+                return View(new UserSettingsViewModel(){User =  us});
+            }
+            else
+            {
+                return View(settings);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Settings(
             string email,
             string password1,
             string password2,
@@ -74,48 +92,25 @@ namespace EmapLibrary.UserInterface.Controllers
             string lastname,
             string birthday)
         {
-            Regex emailRegex = new Regex(@"\A[^@]+@([^@\.]+\.)+[^@\.]+\z");
-            
-            var regViewModel = new RegistrationViewModel
+            var settingsVm = new UserSettingsViewModel()
             {
+                Email = email,
+                Password = password1,
                 Name = name,
                 Surname = surname,
                 LastName = lastname,
-                Email = email,
-                Birthday = birthday,
-                IsEmailError = email != null ? !emailRegex.IsMatch(email) : false,
-                IsPassError = (password1 == null || password2 == null) ? false : password1 != password2
+                StringBirthday = birthday,
+                IsPassError = password1 != password2
             };
-            if (!regViewModel.HaveError())
-            {
-                //correct. Go next page
-                //TODO: add user to database
-                return Redirect("Login");
-            }
-            else
-            {
-                var user = _userService.GetById(0);//user id = id
-                user.EMail = email;
-                user.Name = name;
-                user.Surname = surname;
-                user.LastName = lastname;
-                DateTime.TryParse(birthday, out var a);
-                user.Birthday = a;
-                user.Password = password1;
-                _userService.Edit(user);
 
-                return Redirect("~/User/UserInfo?id="+user.Id);
-            }
-        }
+            if (settingsVm.HaveError())
+                return RedirectToAction("Settings",settingsVm);
+            
+            var user = Mapper.Map<UserSettingsViewModel, User>(settingsVm);
+            user.Id = _auth.User.Id;
 
-        public ActionResult Settings(int id = -1)
-        {
-            UserViewModel us = null;
-            if (id != -1)
-               us = Mapper.Map<User, UserViewModel>( _userService.GetById(id));
-            if (us == null || id == -1)
-                return HttpNotFound();
-            return View();
+            _userService.Edit(user);
+            return RedirectToAction("UserInfo");
         }
 
         public ActionResult UserList(int page = 1)
@@ -131,9 +126,9 @@ namespace EmapLibrary.UserInterface.Controllers
             return View(model);
         }
 
-        public ActionResult History(int id = -1)
+        public ActionResult History()
         {
-            var books = _userService.GetUserBooks(id);
+            var books = _userService.GetUserBooks(_auth.User.Id);
             var viewBooks = new Dictionary<DateTime, IEnumerable<BookViewModel>>();
             foreach (var book in books)
             {
@@ -171,15 +166,11 @@ namespace EmapLibrary.UserInterface.Controllers
             return Redirect("/User/Journal");
         }
 
-        public ActionResult UserInfo(int id = -1)
+        public ActionResult UserInfo()
         {
-            var user = _userService.GetById(id);
-            if(user != null)
-             return View();
-            else
-            {
-                return HttpNotFound();
-            }
+            var user = _userService.GetById(_auth.User.Id);
+            var userView = Mapper.Map<User, UserViewModel>(user);
+            return View(userView);
         }
         
     }

@@ -36,7 +36,7 @@
     <hr class="cleanit">
     
     @{
-        if (Model.IsLogged)
+        if (User.Identity.IsAuthenticated)
         {
             <form action="SetComment" method="get" class="formit comment-form">
                 <input type="text" value="@Model.Id" name="bookId" style="display: none;"/>

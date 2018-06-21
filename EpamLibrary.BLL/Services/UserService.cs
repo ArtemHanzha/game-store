@@ -82,6 +82,7 @@ namespace EpamLibrary.BLL.Services
 
         public void Edit(User user)
         {
+            //TODO: ???? is it correct?
             var us = _userRepository.GetById(user.Id);
             us.Name = user.Name;
             us.Surname = user.Surname;
@@ -108,15 +109,18 @@ namespace EpamLibrary.BLL.Services
         public Dictionary<DateTime, ICollection<Book>> GetUserBooks(int id)
         {
             var history = new Dictionary<DateTime, ICollection<Book>>();
-            var journal = _journalRepository.Get(j => j.Reader.Id == id);
+            var allTest = _journalRepository.Get(); //TODO: remove this
+            var journal = _journalRepository.Get(j => j.Reader.Id == id && !j.IsDeleted);
 
             foreach (var record in journal)
             {
                 if (record.RentalTime != null)
-                    if (history[record.RentalTime.Value.Date] == null)
-                        history[record.RentalTime.Value.Date] = new List<Book>();
-                    else
-                        history[record.RentalTime.Value.Date].Add(record.BookInstance.Book);
+                {
+                    if(!history.ContainsKey(record.RentalTime.Value.Date))
+                        history.Add(record.RentalTime.Value.Date, new List<Book>());
+
+                    history[record.RentalTime.Value.Date].Add(record.BookInstance.Book);//TODO: fix nullRefExc
+                }
             }
 
             return history;

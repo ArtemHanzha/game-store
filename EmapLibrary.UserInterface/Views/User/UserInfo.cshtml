@@ -1,7 +1,20 @@
-﻿@{
+﻿@model EmapLibrary.UserInterface.ViewModels.UserViewModel
+@{
     ViewBag.Title = "UserInfo";
     Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
 }
 
-<h2>UserInfo</h2>
-
+<form class="formit user-form">
+    <label for="login">Login</label>
+    <input type="text" name="login" value="@Model.Login" placeholder="nagibator227" readonly>
+    <label for="email">E-Mail</label>
+    <input type="text" name="email" value="@Model.Email" placeholder="best@site.host" readonly>
+    <label for="name">Name</label>
+    <input type="text" name="name" value="@Model.Name" placeholder="Ivan" readonly>
+    <label for="surname">Surname</label>
+    <input type="text" name="surname" value="@Model.Surname" placeholder="Ivanov" readonly>
+    <label for="lastname">Last name</label>
+    <input type="text" name="lastname" value="@Model.LastName" placeholder="Ivanovich" readonly>
+    <label for="birthday">Birthday</label>
+    <input type="text" name="birthday" value="@Model.Birthday" placeholder="12.12.12" readonly>
+</form>

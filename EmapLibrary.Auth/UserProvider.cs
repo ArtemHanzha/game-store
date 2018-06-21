@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Security.Principal;
+using EpamLibrary.Contracts.Enums;
 using EpamLibrary.Contracts.Models;
 using EpamLibrary.DAL.Interfaces;
 
@@ -29,8 +30,11 @@ namespace EmapLibrary.Auth
 
             var roles = role.Split(",".ToArray(), StringSplitOptions.RemoveEmptyEntries);
 
-            return roles.Any(r =>
-                string.Compare(r, nameof(UserIdentity.User.UserType), StringComparison.OrdinalIgnoreCase) == 0);
+            var enums = Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+            // return roles.Any(r =>
+            //     string.Compare(r, nameof(UserIdentity.User.UserType), StringComparison.OrdinalIgnoreCase) == 0);
+            //return roles.Any(r => enums.Any(e => e.ToString() == r));
+            return roles.Any(r => r == UserIdentity.User.UserType.ToString());
         }
     }
 }

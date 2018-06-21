@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Web.Mvc;
 using AutoMapper;
 using EmapLibrary.Auth.Interfaces;
@@ -29,9 +25,10 @@ namespace EmapLibrary.UserInterface.Controllers
             var model = new HomeViewModel()
             {
                 NewestBooks = Mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(_bookService.GetNewestBooks()),
-                LastReviewed = Mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(_bookService.GetLastReviewedBooks())
+                LastReviewed = Mapper.Map<IEnumerable<Book>, IEnumerable<BookViewModel>>(_bookService.GetLastReviewedBooks()),
+                
             };
-            ViewBag.IsLogged = _auth.User;
+
             return View(model);
         }
         

@@ -43,11 +43,13 @@ namespace EpamLibrary.DAL.Repositories
         public void Create(T item)
         {
             _dbSet.Add(item);
+            _libraryContext.SaveChanges();
         }
 
         public void Update(T item)
         {
             _libraryContext.Entry(item).State = EntityState.Modified;
+            _libraryContext.SaveChanges();
         }
 
         public void Delete(int id)
@@ -60,6 +62,7 @@ namespace EpamLibrary.DAL.Repositories
                 //_dbSet.Remove(toRm); //TODO: is deleted
             }
 
+            _libraryContext.SaveChanges();
         }
     }
 }

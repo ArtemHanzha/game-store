@@ -10,7 +10,9 @@ namespace EmapLibrary.Auth
         public User User { get; set; }
 
         public string Name => User == null ? "N/A" : $"{User.Name} {User.Surname}";
+
         public string AuthenticationType => "Custom";
+
         public bool IsAuthenticated => User != null;
 
         /// <summary>

@@ -1,4 +1,5 @@
-﻿
+﻿@using EpamLibrary.Contracts.Enums
+
 <!DOCTYPE html>
 
 <html>
@@ -6,8 +7,7 @@
     <meta charset="utf-8">
     <title>NINA Theme – Free HTML theme</title>
 
-    <link rel="stylesheet" href="reset.css" type="text/css">
-    <link rel="stylesheet" href="styl.css" type="text/css">
+    @Styles.Render("~/Content/css")
 
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
@@ -24,11 +24,11 @@
 
             <div id="menu">
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Catalog</a></li>
-                    <li><a href="ourwork.html">Top 100</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html" class="active">Sign in</a></li>
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Catalog", "Catalog", "Book")</li>
+                    <li>@Html.ActionLink("Top 100", "Top", "Book")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Cabinet", "UserInfo", "User")</li>
                 </ul>
             </div>
 
@@ -59,18 +59,29 @@
         <div class="user-profile">
             <div class="user-menu">
                 <ul class="user-menu-list">
-                    <li><a href="#info">Info</a></li>
-                    <li><a href="#history">History</a></li>
-                    <li><a href="#settings">Settings</a></li>
-                    <li><a href="#journal">Journal</a></li>
-                    <li><a href="#users">User list</a></li>
-                    <li><a href="#logout">Log out</a></li>
+                    <li>@Html.ActionLink("Info", "UserInfo", "User")</li>
+                    <li>@Html.ActionLink("History", "History", "User")</li>
+                    <li>@Html.ActionLink("Settings", "Settings", "User")</li>
+                    @{
+                        if (User.IsInRole($"{nameof(UserType.Admin)}," +
+                                          $"{nameof(UserType.Moderator)}," +
+                                          $"{nameof(UserType.Librariant)}"))
+                        {
+                            if (!User.IsInRole(nameof(UserType.Librariant)))
+                            {//TODO:journal page
+                                <li>@Html.ActionLink("Journal", "#", "User")</li>
+                            }
+
+                            <li>@Html.ActionLink("User list", "UserList", "User")</li>
+                        }
+                    }
+                    <li>@Html.ActionLink("Log out", "Logout", "Base")</li>
                 </ul>
             </div>
             <div class="user-content">
-                
+
                 @RenderBody()
-                
+
             </div>
         </div>
 
