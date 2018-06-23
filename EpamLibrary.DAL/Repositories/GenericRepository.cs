@@ -25,7 +25,9 @@ namespace EpamLibrary.DAL.Repositories
 
         public T GetById(int id)
         {
-            return _dbSet.Find(id);
+            var entity = _dbSet.FirstOrDefault(e => e.Id == id);
+
+            return entity;
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate = null)

@@ -1,4 +1,4 @@
-﻿
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.LogListViewModel
 @{
     ViewBag.Title = "Journal";
     Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
@@ -7,3 +7,6 @@
 @{//TODO: journal view
   }
 
+@Helpers.DisplayJournalLogs(@Model.Logs)
+
+@Helpers.DisplayPage(Model.PageCount, Model.CurrentPage)

@@ -4,7 +4,9 @@ namespace EmapLibrary.UserInterface.ViewModels
 {
     public class LibraryLogRecordViewModel
     {
-        public int BookInstacneNumber { get; set; }
+        public int Id { get; set; }
+
+        public string BookInstacneNumber { get; set; }
 
         public string BookInstanceNameTitle { get; set; }
 

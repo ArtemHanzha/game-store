@@ -10,7 +10,7 @@ namespace EmapLibrary.UserInterface.ViewModels.Internal
     {
         private DateTime _birthday;
 
-        public UserViewModel User
+        public virtual UserViewModel User
         {
             set
             {
@@ -48,11 +48,10 @@ namespace EmapLibrary.UserInterface.ViewModels.Internal
         public bool IsEmailError { get; set; }
         public string StringBirthday { get; set; }
 
-        public bool IsFirstIn
+        public virtual bool IsFirstIn
         {
             get
             {
-
                 if (string.IsNullOrWhiteSpace(Name) && string.IsNullOrWhiteSpace(Surname) && string.IsNullOrWhiteSpace(LastName) && string.IsNullOrWhiteSpace(StringBirthday))
                 {
                     IsPassError = false;
@@ -63,12 +62,11 @@ namespace EmapLibrary.UserInterface.ViewModels.Internal
                     IsEmailError = false;
                     return true;
                 }
-
                 return false;
             }
         }
 
-        public bool HaveError()
+        public virtual bool HaveError()
         {
             var stringReg = new Regex(@"^\w+$");
             var emailReg = new Regex(@"^.+\@.+\..+$");
@@ -79,7 +77,7 @@ namespace EmapLibrary.UserInterface.ViewModels.Internal
             IsLastNameError |= !stringReg.IsMatch(LastName);
             IsEmailError |= !emailReg.IsMatch(Email);
             IsBirthdayError |= !dateReg.IsMatch(StringBirthday);
-            IsPassError |= !stringReg.IsMatch(Password);
+            IsPassError |= !string.IsNullOrEmpty(Password)? false : stringReg.IsMatch(Password);
 
             if (!IsBirthdayError)
                 Birthday = DateTime.Parse(StringBirthday);

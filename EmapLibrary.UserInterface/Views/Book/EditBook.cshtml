@@ -1,0 +1,33 @@
+﻿@model EmapLibrary.UserInterface.ViewModels.Internal.BookChangeViewModel
+@{
+    ViewBag.Title = "EditBook";
+}
+
+<h2>EditBook</h2>
+@using (Html.BeginForm("EditBook","Book",FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+    @Html.LabelFor(m => m.Title)
+    @Html.TextBoxFor(m => m.Title, new {@class = "error", placeholder = "123"})
+    <input type="submit" class="" />
+}
+<form action="EditBook" method="post" class="formit user-form">
+    <input type="hidden" name="id" value="@Model.Id"/>
+    <label for="title">Title</label>
+    <input type="text" name="title" value="@Model.Title" placeholder="Title" class="@(Model.IsTitleError ? "error" : null)">
+    <label for="pubDate">Buplication date</label>
+    <input type="text" name="pubDate" value="@Model.PublicationDate" placeholder="12/12/1972" class="@(Model.IsPubDateError ? "error" : null)">
+    <label for="publicationHouse">Publication house</label>
+    <input type="text" name="publicationHouse" value="@Model.PubHouse" placeholder="БУКА" class="@(Model.IsPubHouseError ? "error" : null)">
+    <label for="tags">Tags</label>
+    <input type="text" name="tags" value="@Model.Tags" placeholder="t1,t2,t3," class="@(Model.IsTagsError ? "error" : null)">
+    <label for="genres">Genres</label>
+    <input type="text" name="genres" value="@Model.Genres" placeholder="g1,g2,g3," class="@(Model.IsGenresError ? "error" : null)">
+    <label for="authors">Authors</label>
+    <input type="text" name="authors" value="@Model.Authors" placeholder="a1,a2,a3," class="@(Model.IsAuthorsError ? "error" : null)">
+    <label for="description">Description</label>
+    <input type="text" name="description" value="@Model.Description" placeholder="Some great day..." class="@(Model.IsDescriptionError ? "error" : null)">
+    <label for="bookCount">Instances count</label>
+    <input type="text" name="bookCount" value="@Model.InstancesCount" placeholder="12" class="@(Model.IsBookCountError ? "error" : null)">
+    <input type="submit" class="button_submit" value="SAVE">
+</form>

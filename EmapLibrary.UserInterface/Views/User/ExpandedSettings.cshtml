@@ -1,0 +1,45 @@
+﻿@using System.Collections
+@using EpamLibrary.Contracts.Enums
+@model EmapLibrary.UserInterface.ViewModels.Internal.ExpandedSettingsViewModel
+@{
+    ViewBag.Title = "ExpandedSettings";
+    Layout = "~/Views/Shared/_UserPrifileLayout.cshtml";
+
+    //var select = new List<SelectListItem>();
+    //var valuesAsList = Enum.GetValues(typeof(UserType)).Cast<UserType>().ToList();
+    //foreach (var type in valuesAsList)
+    //{
+    //    select.Add(new SelectListItem()
+    //    {
+    //        Text = type.ToString(),
+    //        Value = ((int)type).ToString(),
+    //        Selected = Model.UserType == type
+    //    });
+    //}
+
+}
+
+<form action="/User/ExpandedSettings" method="post" class="formit user-form">
+    <input type="hidden" name="userid" value="@Model.UserId"/>
+    <label for="usertype">User Type</label>
+    @Html.EnumDropDownListFor(x => x.UserType, new {@class = "form-drop-down", name = "usertype"})
+    <label for="workernumber">Worker number</label>
+    <input type="text" name="wokernumber" value="@Model.WorkerNumber" placeholder="1234567" class="@(Model.IsWorkerNumberError ? "error" : null)">
+    <label for="librarynumber">Library number</label>
+    <input type="text" name="librarynumber" value="@Model.LibraryNumber" placeholder="1234567" class="@(Model.IsLibraryNumberError ? "error" : null)">
+    <label for="email">Email</label>
+    <input type="text" name="email" value="@Model.Email" placeholder="e-mail" class="@(Model.IsEmailError ? "error" : null)">
+    <label for="password1">Password</label>
+    <input type="password" name="password1" value="@null" placeholder="********" class="@(Model.IsPassError ? "error" : null)">
+    <label for="password2">Password again</label>
+    <input type="password" name="password2" value="@null" placeholder="********" class="@(Model.IsPassError ? "error" : null)">
+    <label for="name">Name</label>
+    <input type="text" name="name" value="@Model.Name" placeholder="Ivan" class="@(Model.IsNameError ? "error" : null)">
+    <label for="surname">Surname</label>
+    <input type="text" name="surname" value="@Model.Surname" placeholder="Ivanov" class="@(Model.IsSurnameError ? "error" : null)">
+    <label for="lastname">Last Name</label>
+    <input type="text" name="lastname" value="@Model.LastName" placeholder="Ivanovich" class="@(Model.IsLastNameError ? "error" : null)">
+    <label for="birthday">Birthday</label>
+    <input type="text" name="birthday" value="@(Model.IsBirthdayError ? Model.StringBirthday : Model.Birthday.Date.ToShortDateString())" placeholder="DD/MM/YYYY or DD/MM/YY" class="@(Model.IsBirthdayError ? "error" : null)">
+    <input type="submit" class="button_submit" value="SAVE">
+</form>

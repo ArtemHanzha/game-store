@@ -44,29 +44,7 @@ namespace EpamLibrary.BLL.Services
 
                 _userRepository.Delete(userId);
         }
-
-        public void SetAsWorker(int id, string workerNumber, UserType type)
-        {
-            var user = _userRepository.GetById(id);
-            _userRepository.Delete(id);
-            var worker = new User()
-            {
-                Birthday = user.Birthday,
-                BooksHistory = user.BooksHistory,
-                Comments = user.Comments,
-                EMail = user.EMail,
-                HiringDate = DateTime.UtcNow,
-                LastName = user.LastName,
-                Login = user.Login,
-                Name = user.Name,
-                Password = user.Password,
-                Surname = user.Surname,
-                WorkerNumber = workerNumber,
-                UserType = type
-            };
-            _userRepository.Create(worker);
-        }
-
+        
         public bool UserExists(string login)
         {
             var users = _userRepository.Get(c => c.Login == login);
@@ -82,7 +60,6 @@ namespace EpamLibrary.BLL.Services
 
         public void Edit(User user)
         {
-            //TODO: ???? is it correct?
             var us = _userRepository.GetById(user.Id);
             us.Name = user.Name;
             us.Surname = user.Surname;

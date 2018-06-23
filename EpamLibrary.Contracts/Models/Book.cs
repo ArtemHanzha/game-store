@@ -16,13 +16,13 @@ namespace EpamLibrary.Contracts.Models
 
         public string Description { get; set; }
 
-        public ICollection<BookInstance> ConcreteBooks { get; set; }
+        public virtual ICollection<BookInstance> ConcreteBooks { get; set; }
 
-        public ICollection<Comment> BookReviews { get; set; }
+        public virtual ICollection<Comment> BookReviews { get; set; }
 
-        public ICollection<Author> Authors { get; set; }
+        public virtual ICollection<Author> Authors { get; set; }
 
-        public ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
 
         public DateTime? DateOfPublication
         {
@@ -37,7 +37,7 @@ namespace EpamLibrary.Contracts.Models
 
         public float? Price { get; set; }
 
-        public ICollection<Tag> Tags { get; set; }
+        public virtual ICollection<Tag> Tags { get; set; }
 
         //TODO: add image for a book
 

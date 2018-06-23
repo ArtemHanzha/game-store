@@ -26,5 +26,9 @@ namespace EpamLibrary.BLL.Interfaces
         IEnumerable<Book> GetLastReviewedBooks();
 
         IEnumerable<Book> GetNewestBooks();
+
+        IEnumerable<Book> GetBy(string name = null, IEnumerable<Tag> tags = null, IEnumerable<Genre> genres = null);
+
+        void UpdateBook(Book book);
     }
 }

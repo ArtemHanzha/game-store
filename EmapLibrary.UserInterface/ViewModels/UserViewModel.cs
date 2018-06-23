@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using EpamLibrary.Contracts.Enums;
 
 namespace EmapLibrary.UserInterface.ViewModels
 {
     public class UserViewModel
     {
-        private string _fullName;
         public int Id { get; set; }
 
         public string Email { get; set; }
@@ -23,14 +23,16 @@ namespace EmapLibrary.UserInterface.ViewModels
         /// </summary>
         public string FullName
         {
-            get => _fullName;
+            get
+            {
+                return $"{Surname} {Name} {LastName}";
+            }
             set
             {
                 string[] str = value.Split(' ');
                 Name = str[1];
                 Surname = str[0];
                 LastName = str[2];
-                _fullName = value;
             }
         }
 
@@ -41,5 +43,11 @@ namespace EmapLibrary.UserInterface.ViewModels
         public string LastName { get; private set; }
 
         public ICollection<BookViewModel> BooksHistory { get; set; }
+
+        public string WorkerNumber { get; set; }
+
+        public string LibraryNumber { get; set; }
+
+        public UserType UserType { get; set; }
     }
 }

@@ -58,7 +58,24 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(c => c.FullName, opt => opt.MapFrom(s => $"{s.Surname} {s.Name} {s.LastName}"))
                 .ForMember(c => c.IsBlocked, opt => opt.MapFrom(s => s.IsBlocked))
                 .ForMember(c => c.Login, opt => opt.MapFrom(s => s.Login))
+                .ForMember(c => c.WorkerNumber, opt => opt.MapFrom(s => s.WorkerNumber))
+                .ForMember(c => c.LibraryNumber, opt => opt.MapFrom(s => s.ReaderCardNumber))
+                .ForMember(c => c.UserType, opt => opt.MapFrom(s => s.UserType))
                 .ForMember(c => c.BooksHistory, opt => opt.MapFrom(s => Mapper.Map<ICollection<BookInstance>, ICollection<BookViewModel>>(s.BooksHistory)));
+            #endregion
+
+            #region LibraryLogRecord -> LibraryLogRecordVM
+
+            CreateMap<LibraryLogRecord, LibraryLogRecordViewModel>()
+                .ForMember(l => l.User, opt => opt.MapFrom( s=> Mapper.Map<User, UserViewModel>(s.Reader)))
+                .ForMember(l => l.Worker, opt => opt.MapFrom(s => Mapper.Map<User, UserViewModel>(s.Librariant)))
+                .ForMember(l => l.RentalTime, opt => opt.MapFrom(s => s.RentalTime))
+                .ForMember(l => l.ExpectedReturnTime, opt => opt.MapFrom(s => s.ExpectedReturnTime))
+                .ForMember(l => l.RealReturnTime, opt => opt.MapFrom(s => s.ReturnTime))
+                .ForMember(l => l.BookInstacneNumber, opt => opt.MapFrom(s => s.BookInstance.LibraryNumber))
+                .ForMember(l => l.BookInstanceNameTitle, opt => opt.MapFrom(s => s.BookInstance.Book.Title))
+                .ForMember(l => l.Id, opt => opt.MapFrom(s => s.Id));
+
             #endregion
 
             #region UserVM -> User
@@ -79,10 +96,26 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(c => c.Reviewer, opt => opt.MapFrom(s => Mapper.Map<UserViewModel, User>(s.Reviewer)))
                 .ForMember(c => c.Book, opt => opt.MapFrom(s => Mapper.Map<BookViewModel, Book>(s.Book))); //TODO: change this map
             #endregion
+            
+            #region string => Author
 
-            //TODO: map for string - author
-            //TODO: map for string - Tag
-            //TODO: map for string - Genre
+            CreateMap<string, Author>()
+                .ForMember(a => a.Name, opt => opt.MapFrom(s => s.Split(' ')[1]))
+                .ForMember(a => a.Surname, opt => opt.MapFrom(s => s.Split(' ')[0]))
+                .ForMember(a => a.LastName, opt => opt.MapFrom(s => s.Split(' ')[2]));
+            #endregion
+
+            #region string => Tag
+
+            CreateMap<string, Tag>().ForMember(t => t.TagName, opt => opt.MapFrom(s=> s));
+
+            #endregion
+
+            #region string => Genre
+
+            CreateMap<string, Genre>().ForMember(t => t.GenreName, opt => opt.MapFrom(s => s));
+
+            #endregion
 
             #region BookVM -> book
             CreateMap<BookViewModel, Book>()
@@ -125,6 +158,36 @@ namespace EmapLibrary.UserInterface.Infrastructure.Automapping
                 .ForMember(u => u.WorkerNumber, opt => opt.Ignore())
                 .ForMember(u => u.UserType, opt => opt.Ignore())
                 .ForMember(u => u.Id, opt => opt.Ignore());
+
+            #endregion
+
+            #region ExpandedSettingsVM -> User
+
+            CreateMap<ExpandedSettingsViewModel, User>()
+                .ForMember(u => u.UserType, opt => opt.MapFrom(s => s.UserType))
+                .ForMember(u => u.Name, opt => opt.MapFrom(s => s.Name))
+                .ForMember(u => u.Surname, opt => opt.MapFrom(s => s.Surname))
+                .ForMember(u => u.LastName, opt => opt.MapFrom(s => s.LastName))
+                .ForMember(u => u.Birthday, opt => opt.MapFrom(s => s.Birthday))
+                .ForMember(u => u.Password, opt => opt.MapFrom(s => s.Password))
+                .ForMember(u => u.ReaderCardNumber, opt => opt.MapFrom(s => s.LibraryNumber))
+                .ForMember(u => u.WorkerNumber, opt => opt.MapFrom(s => s.WorkerNumber))
+                .ForMember(u => u.EMail, opt => opt.MapFrom(s => s.Email))
+                .ForMember(u => u.IsBlocked, opt => opt.MapFrom(s => s.IsBlocked))
+                .ForMember(u => u.Id, opt => opt.MapFrom(s=>s.UserId));
+
+            #endregion
+
+            #region BookChangeVM -> Book
+
+            CreateMap<BookChangeViewModel, Book>()
+                .ForMember(b => b.Authors, opt => opt.MapFrom(s => Mapper.Map<string, IEnumerable<Author>>(s.Authors)))
+                .ForMember(b => b.Tags, opt => opt.MapFrom(s => Mapper.Map<string, IEnumerable<Tag>>(s.Tags)))
+                .ForMember(b => b.Genres, opt => opt.MapFrom(s => Mapper.Map<string, IEnumerable<Genre>>(s.Genres)))
+                .ForMember(b => b.DateOfPublication, opt => opt.MapFrom(s => int.Parse(s.PublicationDate)))
+                .ForMember(b => b.PublicationHouse, opt => opt.MapFrom(s => s.PubHouse))
+                .ForMember(b => b.Id, opt => opt.MapFrom(s => s.Id))
+                .ForMember(b => b.Description, opt => opt.MapFrom(s => s.Description));
 
             #endregion
         }

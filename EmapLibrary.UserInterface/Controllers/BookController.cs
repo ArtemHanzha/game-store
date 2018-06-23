@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using AutoMapper;
 using EmapLibrary.Auth.Interfaces;
 using EmapLibrary.UserInterface.ViewModels;
+using EmapLibrary.UserInterface.ViewModels.Internal;
 using EpamLibrary.BLL.Interfaces;
 using EpamLibrary.Contracts.Models;
 using Microsoft.Ajax.Utilities;
@@ -54,13 +55,20 @@ namespace EmapLibrary.UserInterface.Controllers
         {
             var book = _bookService.GetBook(id);
             var book1 = Mapper.Map<Book, BookViewModel>(book);
+            var model = new BookInfoViewModel()
+            {
+                Book = book1,
+                Page = 0,
+                PageCount = 0//TODO: pages
+            };
             if(book1!=null)
-                return View(book1);
+                return View(model);
             return HttpNotFound();
         }
 
+        [HttpPost]
         public ActionResult SetComment(
-            string bookId,
+            int bookId,
             int mark,
             string text)
         {
@@ -68,12 +76,12 @@ namespace EmapLibrary.UserInterface.Controllers
             {
                 Rating = mark,
                 Review = text,
-                Book = Mapper.Map<Book, BookViewModel>(_bookService.GetBook(int.Parse(bookId))),
+                Book = Mapper.Map<Book, BookViewModel>(_bookService.GetBook(bookId)),
                 Reviewer = new UserViewModel() {Id = 1} //TODO: this user
             };
-            _commentService.AddComment(int.Parse(bookId), Mapper.Map<CommentViewModel, Comment>(com)); //TODO: this mapper
+            _commentService.AddComment(bookId, Mapper.Map<CommentViewModel, Comment>(com)); //TODO: this mapper
 
-            return BookInfo(int.Parse(bookId));
+            return BookInfo(bookId);
         }
 
         public ActionResult BookSetup(int id = -1)
@@ -112,6 +120,36 @@ namespace EmapLibrary.UserInterface.Controllers
         {
             _bookInstanceService.RemoveBookInstance(id);
             return Redirect("~/Home/Index");
+        }
+
+        [HttpGet]
+        public ActionResult EditBook(int id = -1, BookChangeViewModel bookModel = null)
+        {
+            if (bookModel == null || bookModel.FirstStart())
+            {
+                var book = _bookService.GetBook(id);
+                var bookVm = Mapper.Map<Book, BookViewModel>(book);
+                var model = new BookChangeViewModel(bookVm);
+                return View(model);
+            }
+            else
+            {
+                return View(bookModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult EditBook(BookChangeViewModel model)
+        {
+            if (model.HaveError())
+            {
+                return EditBook(model.Id, model);
+            }
+            else
+            {
+                _bookService.UpdateBook(Mapper.Map<BookChangeViewModel, Book>(model));
+                return BookInfo(model.Id);
+            }
         }
     }
 }

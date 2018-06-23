@@ -1,4 +1,5 @@
-﻿@model  EmapLibrary.UserInterface.ViewModels.BookViewModel
+﻿@using EpamLibrary.Contracts.Enums
+@model  EmapLibrary.UserInterface.ViewModels.Internal.BookInfoViewModel
 @{
 }
 
@@ -18,19 +19,23 @@
 
     <!-- ***** Out team + portraits ***** -->
 
-    <h3>@Model.Title</h3>
+    <h3>@Model.Book.Title</h3>
 
     <div>
         <span class="book-image"> <img src="bookImg" alt="name+book image"> </span>
         <div class="book-description">
-            Genres: @(string.Join(", ", Model.Genres.Select(s => s)))<br>
-            Authors: @(string.Join(", ", Model.Authors.Select(s => s)))<br>
-            Publication date: @Model.PublicationDate <br>
-            Publication house: @Model.PublicationHouse <br>
-            Mark: @(Model.Comments.Count <= 0 ? "No reviews yet" : (Model.Comments.Sum(s => s.Rating) / Model.Comments.Count).ToString())<br>
+            Genres: @(string.Join(", ", Model.Book.Genres.Select(s => s)))<br>
+            Authors: @(string.Join(", ", Model.Book.Authors.Select(s => s)))<br>
+            Publication date: @Model.Book.PublicationDate <br>
+            Publication house: @Model.Book.PublicationHouse <br>
+            Mark: @(Model.Book.Comments.Count <= 0 ? "No reviews yet" : (Model.Book.Comments.Sum(s => s.Rating) / Model.Book.Comments.Count).ToString())<br>
             Top: int <br>
         </div>
-        <div class="book-description text-description">@Model.Description</div>
+        <div class="book-description text-description">@Model.Book.Description</div>
+        @if (User.IsInRole($"{UserType.Admin},{UserType.Moderator},{UserType.Librariant}"))
+        {
+            <a href="@Href("/Book/EditBook?id=" + Model.Book.Id)" class="book-edit-link">edit</a>
+        }
     </div>
 
     <hr class="cleanit">
@@ -39,7 +44,7 @@
         if (User.Identity.IsAuthenticated)
         {
             <form action="SetComment" method="get" class="formit comment-form">
-                <input type="text" value="@Model.Id" name="bookId" style="display: none;"/>
+                <input type="text" value="@Model.Book.Id" name="bookId" style="display: none;"/>
                 <select class="form-select" name="mark" id="sel">
                     <option value="1">Worst I ever read</option>
                     <option value="2">Not recommend</option>
@@ -56,7 +61,7 @@
 
     <hr class="cleanit">
 
-    @Helpers.DisplayComments(Model.Comments)
+    @Helpers.DisplayComments(Model.Book.Comments)
 
 </div>
 
@@ -64,9 +69,4 @@
 
 <!-- ** Pagination ** -->
 
-<ul class="pagination">
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#" class="active">3</a></li>
-    <li><a href="#">4</a></li>
-</ul>
+@Helpers.DisplayPage(Model.PageCount, Model.Page)

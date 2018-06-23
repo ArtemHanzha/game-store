@@ -67,12 +67,14 @@
                                           $"{nameof(UserType.Moderator)}," +
                                           $"{nameof(UserType.Librariant)}"))
                         {
-                            if (!User.IsInRole(nameof(UserType.Librariant)))
-                            {//TODO:journal page
-                                <li>@Html.ActionLink("Journal", "#", "User")</li>
-                            }
 
-                            <li>@Html.ActionLink("User list", "UserList", "User")</li>
+                            <li>@Html.ActionLink("Journal", "Journal", "User")</li>
+
+                            if (!User.IsInRole(nameof(UserType.Librariant)))
+                            {
+                                //TODO:journal page
+                                <li>@Html.ActionLink("User list", "UserList", "User")</li>
+                            }
                         }
                     }
                     <li>@Html.ActionLink("Log out", "Logout", "Base")</li>

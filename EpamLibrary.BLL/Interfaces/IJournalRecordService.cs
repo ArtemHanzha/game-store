@@ -18,5 +18,7 @@ namespace EpamLibrary.BLL.Interfaces
         IEnumerable<LibraryLogRecord> GetRecords(Expression<Func<LibraryLogRecord, bool>> predicate = null, int from = 0, int count = 10);
 
         void Edit(LibraryLogRecord record);
+
+        int RecordsCount();
     }
 }

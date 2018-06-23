@@ -6,6 +6,8 @@ namespace EmapLibrary.UserInterface.Controllers
 {
     public class BaseController : Controller
     {
+        protected const int RecordsOnPage = 10;
+
         protected readonly IAuthentication _auth;
 
         public BaseController(IAuthentication auth)

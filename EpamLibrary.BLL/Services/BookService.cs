@@ -108,5 +108,20 @@ namespace EpamLibrary.BLL.Services
             var books = _bookRepository.Get().OrderByDescending(b => b.Id).Take(4);
             return books;
         }
+
+        public IEnumerable<Book> GetBy(string name = null, IEnumerable<Tag> tags = null, IEnumerable<Genre> genres = null)
+        {
+            var byName = _bookRepository.Get(b => b.Title.Contains(name));
+            var strTags = tags?.Select(t => t.TagName).ToList();
+            //var byTag = byName.Where(b => b.Tags.Select(s => strTags.Contains(s.TagName)));
+            //TODO: search by tags and genres
+
+            return byName;
+        }
+
+        public void UpdateBook(Book book)
+        {
+            _bookRepository.Update(book);
+        }
     }
 }

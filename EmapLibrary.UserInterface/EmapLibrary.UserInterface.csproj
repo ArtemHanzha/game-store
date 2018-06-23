@@ -180,8 +180,12 @@
     <Compile Include="ViewModels\CommentViewModel.cs" />
     <Compile Include="ViewModels\Enums\ActiveSortFilter.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
+    <Compile Include="ViewModels\Internal\BookChangeViewModel.cs" />
+    <Compile Include="ViewModels\Internal\BookInfoViewModel.cs" />
+    <Compile Include="ViewModels\Internal\ExpandedSettingsViewModel.cs" />
     <Compile Include="ViewModels\Internal\HomeViewModel.cs" />
     <Compile Include="ViewModels\Internal\LoginViewModel.cs" />
+    <Compile Include="ViewModels\Internal\LogListViewModel.cs" />
     <Compile Include="ViewModels\Internal\UserBooksViewModel.cs" />
     <Compile Include="ViewModels\Internal\UserSettingsViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
@@ -261,6 +265,8 @@
     <Content Include="Views\User\History.cshtml" />
     <Content Include="Views\User\Journal.cshtml" />
     <Content Include="Views\User\LogSetup.cshtml" />
+    <Content Include="Views\User\ExpandedSettings.cshtml" />
+    <Content Include="Views\Book\EditBook.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

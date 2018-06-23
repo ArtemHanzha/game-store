@@ -68,5 +68,10 @@ namespace EpamLibrary.BLL.Services
         {
             _logRepository.Update(record);
         }
+
+        public int RecordsCount()
+        {
+            return _logRepository.Get().Count();
+        }
     }
 }
